@@ -108,23 +108,39 @@ int main()
 
 
             scanf("%c",&junk); // purge le buffer de scanf
-            printf("Que voulez vous faire ?\n a) Louer un vehicule\n b) rendre un vehicule\n c) consulter mon statut\n d) je sors\n");
+            printf("Que voulez vous faire ?\n ");
+            if (tabutil[utilindex].voiture==0)
+            {
+                printf("\ta) Louer un vehicule\n");
+
+            }
+            else
+            {
+                printf("\tb) rendre un vehicule\n ");
+
+            }
+            printf("\tc) consulter mon statut\n\td) je sors\n");
+
             scanf("%c",&choixUtil);
 
+            // on ne verifie pas que l'utilisateur tape un choix interdit. C'est mal.
             if (choixUtil=='a')
 
             {
                 printf("entrez le numero de la station\n");//demander la station
                 scanf("%d",&stationindex);
-                tabstation[utilindex].station = stationindex;
+                tabutil[utilindex].station = stationindex;
+
 
                 if (tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
                 {
-                    printf("voitures : %d\n",tabstation[1].nbrevoitures);
-                    tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures-1;
+                    print1Station(stationindex);
+
                     //l'attribuer a l'utilisateur
                     printf("une voiture vous a ete attribue\n");
-                    printf("voitures : %d\n",tabstation[1].nbrevoitures);
+                    tabutil[utilindex].voiture=1;
+                    tabstation[stationindex].places=tabstation[stationindex].places+1;
+                    tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures-1;
                     print1Station(stationindex);
                 }
 
@@ -151,16 +167,21 @@ int main()
 
 
                     }
-                    printf("vous devez aller a la station %d\n",tabstation[indexminimum].station);
+                    printf("vous devez aller chercher une voiture a la station %d\n",tabstation[indexminimum].station);
 
                 }
             }
             else if (choixUtil=='b')
             {
                 printf("bonjour, entrez le numero de la station\n");
-                scanf("%d",&tabutil[utilindex].station);//demander la station
-                if (tabstation[utilindex].places!=0) //verifier qu'il y a de la place
+                scanf("%d",&stationindex);//demander la station
+                tabutil[utilindex].station = stationindex;
+                print1Station(stationindex);
+                if (tabstation[stationindex].places!=0) //verifier qu'il y a de la place
                 {
+                    tabutil[utilindex].voiture=0;
+                    tabstation[stationindex].places=tabstation[stationindex].places-1;
+                    tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+1;
 
                     printf("combien de temps avez vous mis ?\n en minutes :");//demander le temps du trajet
                     scanf("%d",&temps);//afficher le prix et le deduire du compte
@@ -171,15 +192,39 @@ int main()
                     }
                     else
                     {
-                        printf("%d",temps);
                         temps=(temps-30);
-                        printf("%d",temps);
                         printf("une facture de %d euros vous sera envoyee\n",temps);
                     }
 
 
                 }
-                //sinon chercher la place la plus proche
+                else //sinon chercher la place la plus proche
+
+                {
+                    int cptstation;
+                    int distancetampon;
+                    int distanceminimum;
+                    int indexminimum;
+                    distanceminimum=666;
+                    indexminimum=666;
+
+                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
+                    {
+                        if(tabstation[cptstation].places!=0)
+                        {
+                            distancetampon=abs(tabstation[cptstation].station-tabstation[stationindex].station);
+                            if(distancetampon<distanceminimum)
+                            {
+                                distanceminimum=distancetampon;
+                                indexminimum=cptstation;
+                            }
+                        }
+
+
+                    }
+                    printf("vous devez aller rendre la voiture a la station %d\n",tabstation[indexminimum].station);
+
+                }
 
 
             }

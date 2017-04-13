@@ -83,15 +83,15 @@ void init_utils_et_stations()
 {
     tabstation[1].station=1;
     tabstation[1].places=17;
-    tabstation[1].nbrevoitures=2;
+    tabstation[1].nbrevoitures=1;
 
     tabstation[2].station=2;
     tabstation[2].places=16;
     tabstation[2].nbrevoitures=2;
 
     tabstation[3].station=3;
-    tabstation[3].places=16;
-    tabstation[3].nbrevoitures=2;
+    tabstation[3].places=0;
+    tabstation[3].nbrevoitures=0;
 
     tabstation[4].station=4;
     tabstation[4].places=16;
@@ -106,6 +106,12 @@ void init_utils_et_stations()
     tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 65;
     strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"cool");
     tabutil[nombre_utilisateurs_deja_enregistres].station=4;
+    tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
+    nombre_utilisateurs_deja_enregistres++;
+    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom,"tata");
+    tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 66;
+    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"gros");
+    tabutil[nombre_utilisateurs_deja_enregistres].station=2;
     tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
     nombre_utilisateurs_deja_enregistres++;
     printUtil();
