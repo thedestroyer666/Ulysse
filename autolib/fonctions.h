@@ -44,8 +44,9 @@ struct station
 };
 struct gestionnaire
 {
-    char nomgest[taille];
-    int service;
+    char nom[taille];
+    char mdp[taille];//mot de passe
+
 };
 
 

@@ -56,8 +56,8 @@ void printGest()
     for(i=0; i<nbregest; i++)
     {
         printf("\ntabgest[%d]\n", i);
-        printf("\t.nomgest=%s\n",tabgest[i].nomgest);
-        printf("\t.service=%d\n",tabgest[i].service);
+        printf("\t.nomgest=%s\n",tabgest[i].nom);
+        printf("\t.service=%s\n",tabgest[i].mdp);
     }
 }
 
@@ -117,18 +117,18 @@ void init_utils_et_stations()
     printUtil();
 
     nbregest=0;
-    strcpy(&tabgest[nbregest].nomgest,"stella");
-    tabgest[nbregest].service = 665;
+    strcpy(&tabgest[nbregest].nom,"stella");
+    strcpy(&tabgest[nbregest].mdp,"fine");
     nbregest++;
-    strcpy(&tabgest[nbregest].nomgest,"ulysse");
-    tabgest[nbregest].service = 666;
+    strcpy(&tabgest[nbregest].nom,"ulysse");
+    strcpy(&tabgest[nbregest].mdp,"gros");
     nbregest++;
     printGest();
 }
 
 int abs(int distance)
-                            {
-                                if(distance < 0) distance=-distance;
-                                return distance;
+{
+    if(distance < 0) distance=-distance;
+    return distance;
 
-                            }
+}

@@ -33,8 +33,10 @@ int main()
     char mdp_temp[taille];//mot de passe util
     char choixUtil;//coix abcd de l'utilisateur
     char junk;//pour debuguer car abcd caractères et enter aussi
-    int utilindex=888,oldutilindex=999;
-
+    int utilindex=888;//l'index de l'utilisateur
+    int oldutilindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
+    int gestindex=888;//l'index du gestionnaire
+    int oldgstindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
 
     //automobile.voiture=16;
 
@@ -164,8 +166,6 @@ int main()
                                 indexminimum=cptstation;
                             }
                         }
-
-
                     }
                     printf("vous devez aller chercher une voiture a la station %d\n",tabstation[indexminimum].station);
 
@@ -246,17 +246,13 @@ int main()
                 printf("%c recommencer\n",choixUtil);
             }
 
-
-
-
-
-
         }
         else if (cpt==2)
         {
             //menu gestionnaire
-            printf("numero ?\n");
-            scanf("%d",&(gest.service));
+          //  printf("numero ?\n");
+           // scanf("%d",&(gest.service));
+
 
         }
         /* else if (cpt==3)
