@@ -7,6 +7,7 @@ extern struct utilisateur tabutil[];
 extern int nombre_utilisateurs_deja_enregistres;
 extern struct gestionnaire tabgest[];
 extern int nbregest;
+extern int NombresStation;
 
 void print1Util(int i)
 {
@@ -29,6 +30,24 @@ void printUtil()
     }
 }
 
+void print1Station(int i)
+{
+    printf("\ntabstation[%d]\n", i);
+    printf("\t.places=%d\n",tabstation[i].places);
+    printf("\t.nbrevoitures=%d\n",tabstation[i].nbrevoitures);
+    printf("\t.station=%d\n",tabstation[i].station);
+}
+
+void printStation()
+{
+    int i;
+    printf("\n%s-%d printStation\n",__FILE__,__LINE__);
+    for(i=0; i<TAILLE_TABS; i++)
+    {
+        print1Station(i);
+    }
+}
+
 void printGest()
 {
     int i;
@@ -37,8 +56,8 @@ void printGest()
     for(i=0; i<nbregest; i++)
     {
         printf("\ntabgest[%d]\n", i);
-        printf("tabgest[i].nomgest=%s\n",tabgest[i].nomgest);
-        printf("tabgest[i].service=%d\n",tabgest[i].service);
+        printf("\t.nomgest=%s\n",tabgest[i].nomgest);
+        printf("\t.service=%d\n",tabgest[i].service);
     }
 }
 
@@ -62,25 +81,25 @@ int utilisateur_deja_enregistre(char *nom_test)
 
 void init_utils_et_stations()
 {
-    tabstation[0].station=1;
-    tabstation[0].places=17;
-    tabstation[0].nbrevoitures=0;
+    tabstation[1].station=1;
+    tabstation[1].places=17;
+    tabstation[1].nbrevoitures=2;
 
-    tabstation[1].station=2;
-    tabstation[1].places=16;
-    tabstation[1].nbrevoitures=0;
-
-    tabstation[2].station=3;
+    tabstation[2].station=2;
     tabstation[2].places=16;
-    tabstation[2].nbrevoitures=0;
+    tabstation[2].nbrevoitures=2;
 
-    tabstation[3].station=4;
+    tabstation[3].station=3;
     tabstation[3].places=16;
-    tabstation[3].nbrevoitures=1;
+    tabstation[3].nbrevoitures=2;
 
-    tabstation[4].station=5;
+    tabstation[4].station=4;
     tabstation[4].places=16;
-    tabstation[4].nbrevoitures=1;
+    tabstation[4].nbrevoitures=2;
+
+    tabstation[5].station=5;
+    tabstation[5].places=16;
+    tabstation[5].nbrevoitures=2;
 
     nombre_utilisateurs_deja_enregistres = 0;
     strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom,"toto");
