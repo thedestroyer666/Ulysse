@@ -17,6 +17,7 @@ extern void printUtil();
 extern void print1Station(int i);
 extern void printStation();
 int utilisateur_deja_enregistre(char *nom_test);
+int gestvalide(char *nom_test);
 extern int abs(int distance);
 
 struct utilisateur

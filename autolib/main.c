@@ -27,7 +27,6 @@ int main()
 
     int numdossier;
     //struct voiture automobile;
-    struct gestionnaire gest;
     char nom_temp[taille];
 
     char mdp_temp[taille];//mot de passe util
@@ -36,7 +35,7 @@ int main()
     int utilindex=888;//l'index de l'utilisateur
     int oldutilindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
     int gestindex=888;//l'index du gestionnaire
-    int oldgstindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
+    int oldgestindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
 
     //automobile.voiture=16;
 
@@ -249,10 +248,33 @@ int main()
         }
         else if (cpt==2)
         {
-            //menu gestionnaire
-          //  printf("numero ?\n");
-           // scanf("%d",&(gest.service));
-
+            printf("Quel est votre nom ?\n");
+            scanf("%s",&(nom_temp[0]));
+            gestindex = gestvalide(nom_temp);
+            if(gestindex!=777)
+            {
+                if(oldgestindex!=gestindex)
+                {
+                    printf("tapez votre mot de passe?\n");
+                    scanf("%s",&(mdp_temp[0]));
+                    if(strcmp(tabgest[gestindex].mdp,mdp_temp)==0)
+                    {
+                        printf("  Bienvenue\n");
+                        //afficher les informations de l'utilisateurs
+                        printGest(gestindex);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    printf("  C est toujours vous\n");
+                    //afficher les informations de l'utilisateurs
+                    //print1gest(utilgest);
+                }
+            }
 
         }
         /* else if (cpt==3)

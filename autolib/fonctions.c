@@ -57,7 +57,7 @@ void printGest()
     {
         printf("\ntabgest[%d]\n", i);
         printf("\t.nomgest=%s\n",tabgest[i].nom);
-        printf("\t.service=%s\n",tabgest[i].mdp);
+        printf("\t.motdepasse=%s\n",tabgest[i].mdp);
     }
 }
 
@@ -69,6 +69,23 @@ int utilisateur_deja_enregistre(char *nom_test)
     {
         printf("tabutil[%d].nom\t= %s\n", i, tabutil[i].nom);
         if(strcmp(tabutil[i].nom,nom_test)==0)
+        {
+            printf("\n:) Trouve![%d]\n", i);
+            return i;
+        }
+    }
+    printf("\n:( Pas trouve!\n");
+    return 777;
+
+}
+int gestvalide(char *nom_test)
+{
+    int i;
+    printf("nom_test=%s",nom_test);
+    for(i=0; i<nbregest; i++)
+    {
+        printf("tabgest[%d].nom\t= %s\n", i, tabgest[i].nom);
+        if(strcmp(tabgest[i].nom,nom_test)==0)
         {
             printf("\n:) Trouve![%d]\n", i);
             return i;
