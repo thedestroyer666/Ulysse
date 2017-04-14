@@ -37,7 +37,7 @@ int main()
     int gestindex=888;//l'index du gestionnaire
     int oldgestindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
     int choixgest;//choix du gestionnaire
-
+    int stationindex;//station que choisit l'utilisateur ou le gestionnaire
     //automobile.voiture=16;
 
 
@@ -59,7 +59,7 @@ int main()
         //while (cpt<=0 || cpt>3);
         if (cpt==1)
         {
-            int stationindex;
+
             //menu utilisateur
             //if(new dossier)
             numdossier=0;
@@ -289,7 +289,7 @@ int main()
                 int compteur;//nbres de voitures a enlever ou ajouter
                 printf("choisissez la station a modifier\n");
                 scanf("%d",&stationindex);
-                printf("combien de voitures voulez vous enlevez");
+                printf("combien de voitures voulez vous enlevez ou ajouter");
                 scanf("%d",&compteur);
                 tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+compteur;
                 if (tabstation[stationindex].nbrevoitures<0)
