@@ -141,7 +141,7 @@ void init_utils_et_stations()
 
     nbregest=0;
     strcpy(&tabgest[nbregest].nom,"stella");
-    strcpy(&tabgest[nbregest].mdp,"fine");
+    strcpy(&tabgest[nbregest].mdp,"wesh");
     nbregest++;
     strcpy(&tabgest[nbregest].nom,"ulysse");
     strcpy(&tabgest[nbregest].mdp,"gros");
