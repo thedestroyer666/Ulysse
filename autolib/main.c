@@ -80,7 +80,8 @@ int main()
                     }
                     else
                     {
-                        return 0;
+                        printf("  Mauvais mot de passe\n");
+                        return 1;
                     }
                 }
                 else
@@ -223,10 +224,7 @@ int main()
 
                     }
                     printf("vous devez aller rendre la voiture a la station %d\n",tabstation[indexminimum].station);
-
                 }
-
-
             }
 
             else if (choixUtil=='c')
@@ -266,7 +264,8 @@ int main()
                     }
                     else
                     {
-                        return 0;
+                        printf("  Mauvais mot de passe\n");
+                        return 1;
                     }
                 }
                 else
@@ -305,6 +304,11 @@ int main()
 
                 printf("choisissez l'utilisateur a modifier\n");
                 scanf("%d",&utilindex);
+                if (utilindex>taille)
+                {
+                    printf("erreur, la base de donnees ne contient pas autant d'utilisateur\n utilisateur %d, maxutilisateur %d\n",utilindex,taille);
+                    return 1;
+                }
                 print1Util(utilindex);
                 printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");
                 scanf("%d",&choixgest);
@@ -318,14 +322,14 @@ int main()
                 else if (choixgest==2)
                 {
                     //printf("%s-%d\n",__FILE__,__LINE__);
-                    return 0;
+                    //return 0;
 
                 }
                 else
                 {
                     //printf("%s-%d\n",__FILE__,__LINE__);
-                    printf("erreur, recommencer");
-                    return 0;
+                    printf("erreur, recommencer. taper 1 ou 2\n");
+                    return 1;
                 }
 
 
@@ -333,8 +337,8 @@ int main()
             else
             {
                 //printf("%s-%d\n",__FILE__,__LINE__);
-                printf("erreur, recommencer.");
-                return 0;
+                printf("erreur, recommencer. taper 1 ou 2\n");
+                return 1;
             }
 
         }
