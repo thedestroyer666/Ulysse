@@ -288,7 +288,14 @@ int main()
                 int compteur;//nbres de voitures a enlever ou ajouter
                 printf("choisissez la station a modifier\n");
                 scanf("%d",&stationindex);
-                printf("combien de voitures voulez vous enlevez ou ajouter");
+                if ((stationindex==0)||(stationindex>TAILLE_TABS))
+                {
+                    printf("erreur, la base de donnees ne contient pas autant de station\n Station %d, MaxStation%d\n",stationindex,TAILLE_TABS);
+                    return 1;
+
+                }
+
+                printf("combien de voitures voulez vous enlevez ou ajouter?\n");
                 scanf("%d",&compteur);
                 tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+compteur;
                 if (tabstation[stationindex].nbrevoitures<0)
