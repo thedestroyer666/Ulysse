@@ -57,7 +57,6 @@ int main()
 
         }
         //while (cpt<=0 || cpt>3);
-
         if (cpt==1)
         {
             int stationindex;
@@ -67,7 +66,7 @@ int main()
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
             utilindex = utilisateur_deja_enregistre(nom_temp);
-            if(utilindex!=777)
+            if((utilindex!=777)&&(tabutil[utilindex].abonnement==1))
             {
                 if(oldutilindex!=utilindex)
                 {
@@ -105,6 +104,7 @@ int main()
                 nombre_utilisateurs_deja_enregistres++;
                 printUtil();
                 utilindex = nombre_utilisateurs_deja_enregistres;
+                tabutil[utilindex].abonnement=1;
             }
             oldutilindex=utilindex;
 
@@ -286,29 +286,52 @@ int main()
             scanf("%d",&choixgest);
             if (choixgest==1)  //consulter et modifier nbre vehicules
             {
-                printf("choisissez l'utilisateur a modifie\n");
+                printf("choisissez la station a modifier\n");
+
 
 
             }
             else if (choixgest==2)  // consulter et modifier comptes utilisateurs
             {
 
+                printf("choisissez l'utilisateur a modifier\n");
+                scanf("%d",&utilindex);
+                print1Util(utilindex);
+                printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");
+                scanf("%d",&utilindex);
+
+                if (choixgest==1)
+                {
+                    tabutil[utilindex].abonnement=0;
+
+                }
+                else if (choixgest==2)
+                {
+                    printf("%s-%d\n",__FILE__,__LINE__);
+                    return 0;
+
+                }
+                else
+                {
+                    printf("%s-%d\n",__FILE__,__LINE__);
+                    printf("erreur, recommencer");
+                    return 0;
+                }
 
 
             }
             else
             {
-
+                printf("%s-%d\n",__FILE__,__LINE__);
                 printf("erreur, recommencer.");
+                return 0;
             }
 
         }
-
+        printf("%s-%d\n",__FILE__,__LINE__);
 
     }
+    while ( cpt!=3);
 
-
- while ( cpt!=3);
-
-
+    printf("%s-%d\n",__FILE__,__LINE__);
 }

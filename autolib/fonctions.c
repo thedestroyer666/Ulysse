@@ -15,6 +15,7 @@ void print1Util(int i)
     printf("\t.nom=%s\n",tabutil[i].nom);
     printf("\t.numdossier=%d\n",tabutil[i].numdossier);
     printf("\t.mdp=%s\n",tabutil[i].mdp);
+    printf("\t.abonnement=%d\n",tabutil[i].abonnement);
     printf("\t.voiture=%d\n",tabutil[i].voiture);
     printf("\t.station=%d\n",tabutil[i].station);
 }
@@ -124,12 +125,14 @@ void init_utils_et_stations()
     strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"cool");
     tabutil[nombre_utilisateurs_deja_enregistres].station=4;
     tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
+    tabutil[nombre_utilisateurs_deja_enregistres].abonnement=1;
     nombre_utilisateurs_deja_enregistres++;
     strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom,"tata");
     tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 66;
     strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"gros");
     tabutil[nombre_utilisateurs_deja_enregistres].station=2;
     tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
+    tabutil[nombre_utilisateurs_deja_enregistres].abonnement=1;
     nombre_utilisateurs_deja_enregistres++;
     printUtil();
 

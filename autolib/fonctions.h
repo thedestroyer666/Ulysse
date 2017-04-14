@@ -26,7 +26,7 @@ struct utilisateur
 
     int numdossier;
     char nom[taille];
-    int abonnement;//0=pasabo 1=abo
+    int abonnement;//0=pas abo 1=abo
     char mdp[taille];//mot de passe
     int station;//station ou se trouve l'utilisateur
     int voiture;//0=pieds 1=voiture
