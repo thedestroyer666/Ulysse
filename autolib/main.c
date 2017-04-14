@@ -286,7 +286,16 @@ int main()
             scanf("%d",&choixgest);
             if (choixgest==1)  //consulter et modifier nbre vehicules
             {
+                int compteur;//nbres de voitures a enlever ou ajouter
                 printf("choisissez la station a modifier\n");
+                scanf("%d",&stationindex);
+                printf("combien de voitures voulez vous enlevez");
+                scanf("%d",&compteur);
+                tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+compteur;
+                if (tabstation[stationindex].nbrevoitures<0)
+                {
+                    tabstation[stationindex].nbrevoitures=0;
+                }
 
 
 
@@ -308,13 +317,13 @@ int main()
                 }
                 else if (choixgest==2)
                 {
-                    printf("%s-%d\n",__FILE__,__LINE__);
+                    //printf("%s-%d\n",__FILE__,__LINE__);
                     return 0;
 
                 }
                 else
                 {
-                    printf("%s-%d\n",__FILE__,__LINE__);
+                    //printf("%s-%d\n",__FILE__,__LINE__);
                     printf("erreur, recommencer");
                     return 0;
                 }
@@ -323,16 +332,16 @@ int main()
             }
             else
             {
-                printf("%s-%d\n",__FILE__,__LINE__);
+                //printf("%s-%d\n",__FILE__,__LINE__);
                 printf("erreur, recommencer.");
                 return 0;
             }
 
         }
-        printf("%s-%d\n",__FILE__,__LINE__);
+        //printf("%s-%d\n",__FILE__,__LINE__);
 
     }
     while ( cpt!=3);
 
-    printf("%s-%d\n",__FILE__,__LINE__);
+    //printf("%s-%d\n",__FILE__,__LINE__);
 }
