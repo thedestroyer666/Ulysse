@@ -27,7 +27,10 @@ void printUtil()
     printf("nombre_utilisateurs_deja_enregistres =%d",nombre_utilisateurs_deja_enregistres);
     for(i=0; i<nombre_utilisateurs_deja_enregistres; i++)
     {
-        print1Util(i);
+        if(tabutil[i].abonnement==1)
+        {
+            print1Util(i);
+        }
     }
 }
 
