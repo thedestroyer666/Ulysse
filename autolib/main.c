@@ -298,11 +298,12 @@ int main()
                 scanf("%d",&utilindex);
                 print1Util(utilindex);
                 printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");
-                scanf("%d",&utilindex);
+                scanf("%d",&choixgest);
 
                 if (choixgest==1)
                 {
                     tabutil[utilindex].abonnement=0;
+                    print1Util(utilindex);
 
                 }
                 else if (choixgest==2)
