@@ -36,6 +36,7 @@ int main()
     int oldutilindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
     int gestindex=888;//l'index du gestionnaire
     int oldgestindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
+    int choixgest;//choix du gestionnaire
 
     //automobile.voiture=16;
 
@@ -246,7 +247,7 @@ int main()
             }
 
         }
-        else if (cpt==2)
+        else if (cpt==2)//si gestonnaire
         {
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
@@ -277,20 +278,37 @@ int main()
                 }
             }
             printf("  C est toujours vous\n");
-            printUtil();
+            printUtil();//statistiques
             printStation();
 
-        }
-        /* else if (cpt==3)
-         {//cas annulé
+            printf("\t1) ajouter ou supprimer des vehicules\n \t2) supprimer un utilisateur\n");
 
-         }*/
+            scanf("%d",&choixgest);
+            if (choixgest==1)  //consulter et modifier nbre vehicules
+            {
+                printf("choisissez l'utilisateur a modifie\n");
+
+
+            }
+            else if (choixgest==2)  // consulter et modifier comptes utilisateurs
+            {
+
+
+
+            }
+            else
+            {
+
+                printf("erreur, recommencer.");
+            }
+
+        }
 
 
     }
-    while ( cpt!=3);
-//si gestonnaire
-    // consulter et modifier comptes utilisateurs
-    //consulter et modifier nbre vehicules
-    //statistiques
+
+
+ while ( cpt!=3);
+
+
 }
