@@ -270,11 +270,15 @@ int main()
                 }
                 else
                 {
-                    printf("  C est toujours vous\n");
-                    //afficher les informations de l'utilisateurs
+
+
+                    //afficher les informations des utilisateurs
                     //print1gest(utilgest);
                 }
             }
+            printf("  C est toujours vous\n");
+            printUtil();
+            printStation();
 
         }
         /* else if (cpt==3)
