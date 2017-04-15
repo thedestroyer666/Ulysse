@@ -1,25 +1,9 @@
 #ifndef FONCTIONS_H_INCLUDED
 #define FONCTIONS_H_INCLUDED
 
-#define STRINGIFY2( x) #x
-#define STRINGIFY(x) STRINGIFY2(x)
-#define valueInt( myvar) STRINGIFY(myvar##_), myvar
-#define my_printInt( myvar) printf("%s\t= %d\n",valueInt( myvar))
-#define valueStr( myvar) STRINGIFY(myvar##_), myvar
-#define my_printStr( myvar) printf("%s\t= %s\n",valueInt( myvar))
-
 #define TAILLE_NOM 30
 #define TAILLE_TABS 7
 
-extern void init_utils_et_stations();
-extern void print1Util(int i);
-extern void printUtil();
-extern void print1Station(int i);
-extern void printStation();
-extern void printGest();
-int utilisateur_deja_enregistre(char *nom_test);
-int gestvalide(char *nom_test);
-extern int abs(int distance);
 
 struct utilisateur
 {
@@ -57,12 +41,17 @@ typedef struct
     struct utilisateur  tabutil[TAILLE_TABS];
     int                 nombre_utilisateurs_deja_enregistres;
 } t_sauve;
+
 extern t_sauve sauve;
-
-
-
-void SaveState(t_sauve a_ecrire);
-void RestoreState(t_sauve *a_initialiser);
-
-
+extern void init_utils_et_stations();
+extern void print1Util(int i);
+extern void printUtil();
+extern void print1Station(int i);
+extern void printStation();
+extern void printGest();
+extern int utilisateur_deja_enregistre(char *nom_test);
+extern int gestvalide(char *nom_test);
+extern int abs(int distance);
+extern void SaveState(t_sauve a_ecrire);
+extern void RestoreState(t_sauve *a_initialiser);
 #endif // FONCTIONS_H_INCLUDED

@@ -121,7 +121,7 @@ void init_utils_et_stations()
     sauve.tabstation[5].nbrevoitures=2;
 
     sauve.nombre_utilisateurs_deja_enregistres = 0;
-    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],"toto");
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],"toto"); //&yyyy[0] est un char * : strcpy(char *dest, const char *src)
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 65;
     strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],"cool");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=4;
@@ -154,6 +154,9 @@ int abs(int distance)
 
 }
 
+
+// ask google : c language save and read data from file
+// https://www.gamedev.net/topic/633653-save-and-read-data-from-file/
 void SaveState(t_sauve a_ecrire)
 {
     // Open the file for writing binary
