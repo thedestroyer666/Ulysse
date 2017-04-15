@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fonctions.h"
 
 extern struct gestionnaire tabgest[];
@@ -69,7 +70,7 @@ int utilisateur_deja_enregistre(char *nom_test)
     for(i=0; i<sauve.nombre_utilisateurs_deja_enregistres; i++)
     {
         printf("sauve.tabutil[%d].nom\t= %s\n", i, sauve.tabutil[i].nom);
-        if(strcmp(sauve.tabutil[i].nom,nom_test)==0)
+        if(strcmp(sauve.tabutil[i].nom,&nom_test[0])==0)
         {
             printf("\n:) Trouve![%d]\n", i);
             return i;
@@ -120,16 +121,16 @@ void init_utils_et_stations()
     sauve.tabstation[5].nbrevoitures=2;
 
     sauve.nombre_utilisateurs_deja_enregistres = 0;
-    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom,"toto");
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],"toto");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 65;
-    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp,"cool");
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],"cool");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=4;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
     sauve.nombre_utilisateurs_deja_enregistres++;
-    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom,"tata");
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],"tata");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 66;
-    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp,"gros");
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],"gros");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=2;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
@@ -137,11 +138,11 @@ void init_utils_et_stations()
     printUtil();
 
     nbregest=0;
-    strcpy(&tabgest[nbregest].nom,"stella");
-    strcpy(&tabgest[nbregest].mdp,"wesh");
+    strcpy(&tabgest[nbregest].nom[0],"stella");
+    strcpy(&tabgest[nbregest].mdp[0],"wesh");
     nbregest++;
-    strcpy(&tabgest[nbregest].nom,"ulysse");
-    strcpy(&tabgest[nbregest].mdp,"gros");
+    strcpy(&tabgest[nbregest].nom[0],"ulysse");
+    strcpy(&tabgest[nbregest].mdp[0],"gros");
     nbregest++;
     printGest();
 }
@@ -153,7 +154,7 @@ int abs(int distance)
 
 }
 
-/*void SaveState(TPlayerState PlayerState)
+void SaveState(t_sauve *a_ecrire)
 {
     // Open the file for writing binary
     FILE *fSaveFile = fopen("SaveFile.bin", "wb");
@@ -161,18 +162,16 @@ int abs(int distance)
     if (fSaveFile)
     {
         // Write the structure to the file
-        fwrite(&PlayerState, sizeof(TPlayerState), 1, fSaveFile);
+        fwrite(a_ecrire, sizeof(a_ecrire), 1, fSaveFile);
         fclose(fSaveFile);
     }
     else
     {
-        printf("Error opening savefile!\n");
+        printf("Erreur ouverture Savefile.bin pour sauvegarde!\n");
     }
 }
 
-// Loads a players state.  You'd call this with a pointer to the Player's State, like this:
-// RestoreState(&PlayerState);
-void RestoreState(TPlayerState *pPlayerState)
+void RestoreState(t_sauve *a_initialiser)
 {
     // Open the file for reading binary
     FILE *fLoadFile = fopen("SaveFile.bin", "rb");
@@ -180,13 +179,13 @@ void RestoreState(TPlayerState *pPlayerState)
     if (fLoadFile)
     {
         // read the structure from the file
-        fread(pPlayerState, sizeof(TPlayerState), 1, fLoadFile);
+        fread(a_initialiser, sizeof(a_initialiser), 1, fLoadFile);
         fclose(fLoadFile);
     }
     else
     {
-        printf("Error opening savefile!\n");
+        printf("Erreur ouverture Savefile.bin pour relecture de la sauvegarde!\nMais ca ne fait rien, on fera sans\n");
     }
-}*/
+}
 
 

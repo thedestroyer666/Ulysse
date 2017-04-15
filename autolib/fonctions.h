@@ -57,6 +57,8 @@ struct t_sauve
     struct utilisateur  tabutil[TAILLE_TABS];
     int                 nombre_utilisateurs_deja_enregistres;
 };
+typedef struct tt_sauve t_sauve;
 extern struct t_sauve sauve;
+
 
 #endif // FONCTIONS_H_INCLUDED
