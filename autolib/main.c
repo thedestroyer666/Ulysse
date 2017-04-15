@@ -7,7 +7,7 @@
 /*struct station sauve.tabstation[TAILLE_TABS];
 struct utilisateur sauve.tabutil[TAILLE_TABS];*/
 
-struct t_sauve sauve;
+t_sauve sauve;
 
 //int nombre_utilisateurs_deja_enregistres = 0;
 struct gestionnaire tabgest[TAILLE_TABS];
@@ -29,9 +29,10 @@ int main()
     int oldgestindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
     int choixgest;              //choix du gestionnaire
     int stationindex;           //station que choisit l'utilisateur ou le gestionnaire
-sauve.nombre_utilisateurs_deja_enregistres = 0;
+    sauve.nombre_utilisateurs_deja_enregistres = 0;
 
-    init_utils_et_stations();
+    init_utils_et_stations(); // de toutes facon on initialise la structure
+    RestoreState(&sauve); // si jamis on trouve un fichier Savefile.bin, on initialise la structure avec ce que l'on trouve dedans
     do   //pour tout recommencer
     {
         //Demander la nature de la personne (gestionnaire, utilisateur)
@@ -347,8 +348,8 @@ sauve.nombre_utilisateurs_deja_enregistres = 0;
                 else
                 {
                     //printf("%s-%d\n",__FILE__,__LINE__);
-                    printf("erreur, recommencer. taper 1 ou 2\n");
-                    return 1;
+                    printUtil();//statistiques
+                    printStation();
                 }
 
 
@@ -356,8 +357,8 @@ sauve.nombre_utilisateurs_deja_enregistres = 0;
             else
             {
                 //printf("%s-%d\n",__FILE__,__LINE__);
-                printf("erreur, recommencer. taper 1 ou 2\n");
-                return 1;
+                printUtil();//statistiques
+                printStation();
             }
 
         }
@@ -365,6 +366,8 @@ sauve.nombre_utilisateurs_deja_enregistres = 0;
 
     }
     while ( cpt!=3);
+    SaveState(sauve); // a la sortie on sauve dans un fichier Savefile.bin
+
 
     //printf("%s-%d\n",__FILE__,__LINE__);
 }

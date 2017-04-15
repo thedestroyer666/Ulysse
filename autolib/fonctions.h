@@ -51,14 +51,18 @@ struct gestionnaire
 
 };
 
-struct t_sauve
+typedef struct
 {
     struct station      tabstation[TAILLE_TABS];
     struct utilisateur  tabutil[TAILLE_TABS];
     int                 nombre_utilisateurs_deja_enregistres;
-};
-typedef struct tt_sauve t_sauve;
-extern struct t_sauve sauve;
+} t_sauve;
+extern t_sauve sauve;
+
+
+
+void SaveState(t_sauve a_ecrire);
+void RestoreState(t_sauve *a_initialiser);
 
 
 #endif // FONCTIONS_H_INCLUDED

@@ -154,7 +154,7 @@ int abs(int distance)
 
 }
 
-void SaveState(t_sauve *a_ecrire)
+void SaveState(t_sauve a_ecrire)
 {
     // Open the file for writing binary
     FILE *fSaveFile = fopen("SaveFile.bin", "wb");
@@ -162,8 +162,9 @@ void SaveState(t_sauve *a_ecrire)
     if (fSaveFile)
     {
         // Write the structure to the file
-        fwrite(a_ecrire, sizeof(a_ecrire), 1, fSaveFile);
+        fwrite(&a_ecrire, sizeof(t_sauve), 1, fSaveFile);
         fclose(fSaveFile);
+        printf("*** Sauvegarde dans Savefile.bin \n");
     }
     else
     {
@@ -179,8 +180,9 @@ void RestoreState(t_sauve *a_initialiser)
     if (fLoadFile)
     {
         // read the structure from the file
-        fread(a_initialiser, sizeof(a_initialiser), 1, fLoadFile);
+        fread(a_initialiser, sizeof(t_sauve), 1, fLoadFile);
         fclose(fLoadFile);
+        printf("*** Relecture de la sauvegarde dans Savefile.bin \n");
     }
     else
     {
