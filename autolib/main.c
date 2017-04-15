@@ -4,9 +4,12 @@
 #include "fonctions.h"
 
 
-struct station tabstation[TAILLE_TABS];
-struct utilisateur tabutil[TAILLE_TABS];
-int nombre_utilisateurs_deja_enregistres = 0;
+/*struct station sauve.tabstation[TAILLE_TABS];
+struct utilisateur sauve.tabutil[TAILLE_TABS];*/
+
+struct t_sauve sauve;
+
+//int nombre_utilisateurs_deja_enregistres = 0;
 struct gestionnaire tabgest[TAILLE_TABS];
 int nbregest = 0;
 int temps;//temps du trajet
@@ -15,31 +18,18 @@ int main()
 {
     int cpt=10 ;
     int temps=0 ;
-    FILE *fichier;
-    char nomFichier[30]="dossier_utilisateur.txt";
-    fichier=fopen(nomFichier, "w");//pour ouvrir le fichier en mode écriture
-    fprintf(fichier, "%d\n", cpt);
-
-    fclose(fichier);//pour fermer le fichier
-
-
-    //int tab[TAILLE_TABS][TAILLE_TABS];
-
     int numdossier;
-    //struct voiture automobile;
-    char nom_temp[taille];
-
-    char mdp_temp[taille];//mot de passe util
-    char choixUtil;//coix abcd de l'utilisateur
-    char junk;//pour debuguer car abcd caractères et enter aussi
-    int utilindex=888;//l'index de l'utilisateur
-    int oldutilindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
-    int gestindex=888;//l'index du gestionnaire
-    int oldgestindex=999;// pour ne pas a avoir a rentrer deux fois le mdp
-    int choixgest;//choix du gestionnaire
-    int stationindex;//station que choisit l'utilisateur ou le gestionnaire
-    //automobile.voiture=16;
-
+    char nom_temp[TAILLE_NOM];  //quand on lit un nom
+    char mdp_temp[TAILLE_NOM];  //quand on lit un mot de passe
+    char choixUtil;             //coix abcd de l'utilisateur
+    char junk;                  //pour debuguer car abcd caractères et enter aussi
+    int utilindex=888;          //l'index de l'utilisateur
+    int oldutilindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
+    int gestindex=888;          //l'index du gestionnaire
+    int oldgestindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
+    int choixgest;              //choix du gestionnaire
+    int stationindex;           //station que choisit l'utilisateur ou le gestionnaire
+sauve.nombre_utilisateurs_deja_enregistres = 0;
 
     init_utils_et_stations();
     do   //pour tout recommencer
@@ -67,7 +57,7 @@ int main()
             scanf("%s",&(nom_temp[0]));
             utilindex = utilisateur_deja_enregistre(nom_temp);
             print1Util(utilindex);
-            if (tabutil[utilindex].abonnement==1)
+            if (sauve.tabutil[utilindex].abonnement==1)
             {
                 if(utilindex!=777)
 
@@ -77,7 +67,7 @@ int main()
                         printf("tapez votre mot de passe?\n");
                         scanf("%s",&(mdp_temp[0]));
                         print1Util(utilindex);
-                        if(strcmp(tabutil[utilindex].mdp,mdp_temp)==0)
+                        if(strcmp(sauve.tabutil[utilindex].mdp,mdp_temp)==0)
                         {
                             printf("  Bienvenue\n");
                             //afficher les informations de l'utilisateurs
@@ -104,20 +94,20 @@ int main()
                     scanf("%s",&(mdp_temp[0]));
                     printf("votre numero de dossier est %d\n",numdossier);
 
-                    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom[0],nom_temp);
-                    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp[0],mdp_temp);
-                    tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 100+nombre_utilisateurs_deja_enregistres;
-                    nombre_utilisateurs_deja_enregistres++;
+                    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],nom_temp);
+                    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],mdp_temp);
+                    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 100+sauve.nombre_utilisateurs_deja_enregistres;
+                    sauve.nombre_utilisateurs_deja_enregistres++;
                     printUtil();
-                    utilindex = nombre_utilisateurs_deja_enregistres;
-                    tabutil[utilindex].abonnement=1;
+                    utilindex = sauve.nombre_utilisateurs_deja_enregistres;
+                    sauve.tabutil[utilindex].abonnement=1;
                 }
                 oldutilindex=utilindex;
 
 
                 scanf("%c",&junk); // purge le buffer de scanf
                 printf("Que voulez vous faire ?\n ");
-                if (tabutil[utilindex].voiture==0)
+                if (sauve.tabutil[utilindex].voiture==0)
                 {
                     printf("\ta) Louer un vehicule\n");
 
@@ -137,18 +127,18 @@ int main()
                 {
                     printf("entrez le numero de la station\n");//demander la station
                     scanf("%d",&stationindex);
-                    tabutil[utilindex].station = stationindex;
+                    sauve.tabutil[utilindex].station = stationindex;
 
 
-                    if (tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
+                    if (sauve.tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
                     {
                         print1Station(stationindex);
 
                         //l'attribuer a l'utilisateur
                         printf("une voiture vous a ete attribue\n");
-                        tabutil[utilindex].voiture=1;
-                        tabstation[stationindex].places=tabstation[stationindex].places+1;
-                        tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures-1;
+                        sauve.tabutil[utilindex].voiture=1;
+                        sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places+1;
+                        sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures-1;
                         print1Station(stationindex);
                     }
 
@@ -163,9 +153,9 @@ int main()
 
                         for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
                         {
-                            if(tabstation[cptstation].nbrevoitures!=0)
+                            if(sauve.tabstation[cptstation].nbrevoitures!=0)
                             {
-                                distancetampon=abs(tabstation[cptstation].station-tabstation[stationindex].station);
+                                distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
                                 if(distancetampon<distanceminimum)
                                 {
                                     distanceminimum=distancetampon;
@@ -173,7 +163,7 @@ int main()
                                 }
                             }
                         }
-                        printf("vous devez aller chercher une voiture a la station %d\n",tabstation[indexminimum].station);
+                        printf("vous devez aller chercher une voiture a la station %d\n",sauve.tabstation[indexminimum].station);
 
                     }
                 }
@@ -181,13 +171,13 @@ int main()
                 {
                     printf("bonjour, entrez le numero de la station\n");
                     scanf("%d",&stationindex);//demander la station
-                    tabutil[utilindex].station = stationindex;
+                    sauve.tabutil[utilindex].station = stationindex;
                     print1Station(stationindex);
-                    if (tabstation[stationindex].places!=0) //verifier qu'il y a de la place
+                    if (sauve.tabstation[stationindex].places!=0) //verifier qu'il y a de la place
                     {
-                        tabutil[utilindex].voiture=0;
-                        tabstation[stationindex].places=tabstation[stationindex].places-1;
-                        tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+1;
+                        sauve.tabutil[utilindex].voiture=0;
+                        sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places-1;
+                        sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+1;
 
                         printf("combien de temps avez vous mis ?\n en minutes :");//demander le temps du trajet
                         scanf("%d",&temps);//afficher le prix et le deduire du compte
@@ -216,9 +206,9 @@ int main()
 
                         for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
                         {
-                            if(tabstation[cptstation].places!=0)
+                            if(sauve.tabstation[cptstation].places!=0)
                             {
-                                distancetampon=abs(tabstation[cptstation].station-tabstation[stationindex].station);
+                                distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
                                 if(distancetampon<distanceminimum)
                                 {
                                     distanceminimum=distancetampon;
@@ -228,7 +218,7 @@ int main()
 
 
                         }
-                        printf("vous devez aller rendre la voiture a la station %d\n",tabstation[indexminimum].station);
+                        printf("vous devez aller rendre la voiture a la station %d\n",sauve.tabstation[indexminimum].station);
                     }
                 }
 
@@ -242,7 +232,7 @@ int main()
                     scanf("%d",&choix);
                     if (choix==1)
                     {
-                        tabutil[utilindex].abonnement=0;
+                        sauve.tabutil[utilindex].abonnement=0;
                         print1Util(utilindex);
                     }
 
@@ -267,100 +257,91 @@ int main()
                 return 1;
             }
         }
-            else if (cpt==2)//si gestonnaire
+        else if (cpt==2)//si gestonnaire
+        {
+            printf("Quel est votre nom ?\n");
+            scanf("%s",&(nom_temp[0]));
+            gestindex = gestvalide(nom_temp);
+            if(gestindex!=777)
             {
-                printf("Quel est votre nom ?\n");
-                scanf("%s",&(nom_temp[0]));
-                gestindex = gestvalide(nom_temp);
-                if(gestindex!=777)
+                if(oldgestindex!=gestindex)
                 {
-                    if(oldgestindex!=gestindex)
+                    printf("tapez votre mot de passe?\n");
+                    scanf("%s",&(mdp_temp[0]));
+                    if(strcmp(tabgest[gestindex].mdp,mdp_temp)==0)
                     {
-                        printf("tapez votre mot de passe?\n");
-                        scanf("%s",&(mdp_temp[0]));
-                        if(strcmp(tabgest[gestindex].mdp,mdp_temp)==0)
-                        {
-                            printf("  Bienvenue\n");
-                            //afficher les informations de l'utilisateurs
-                            printGest(gestindex);
-                        }
-                        else
-                        {
-                            printf("  Mauvais mot de passe\n");
-                            return 1;
-                        }
+                        printf("  Bienvenue\n");
+                        //afficher les informations de l'utilisateurs
+                        printGest(gestindex);
                     }
                     else
                     {
-
-
-                        //afficher les informations des utilisateurs
-                        //print1gest(utilgest);
+                        printf("  Mauvais mot de passe\n");
+                        return 1;
                     }
                 }
-                printf("  C est toujours vous\n");
-                printUtil();//statistiques
-                printStation();
+                else
+                {
 
-                printf("\t1) ajouter ou supprimer des vehicules\n \t2) supprimer un utilisateur\n");
 
+                    //afficher les informations des utilisateurs
+                    //print1gest(utilgest);
+                }
+            }
+            printf("  C est toujours vous\n");
+            printUtil();//statistiques
+            printStation();
+
+            printf("\t1) ajouter ou supprimer des vehicules\n \t2) supprimer un utilisateur\n");
+
+            scanf("%d",&choixgest);
+            if (choixgest==1)  //consulter et modifier nbre vehicules
+            {
+                int compteur;//nbres de voitures a enlever ou ajouter
+                printf("choisissez la station a modifier\n");
+                scanf("%d",&stationindex);
+                if ((stationindex==0)||(stationindex>TAILLE_TABS))
+                {
+                    printf("erreur, la base de donnees ne contient pas autant de station\n Station %d, MaxStation%d\n",stationindex,TAILLE_TABS);
+                    return 1;
+
+                }
+
+                printf("combien de voitures voulez vous enlevez ou ajouter?\n");
+                scanf("%d",&compteur);
+                sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+compteur;
+                if (sauve.tabstation[stationindex].nbrevoitures<0)
+                {
+                    sauve.tabstation[stationindex].nbrevoitures=0;
+                }
+
+
+
+            }
+            else if (choixgest==2)  // consulter et modifier comptes utilisateurs
+            {
+
+                printf("choisissez l'utilisateur a modifier\n");
+                scanf("%d",&utilindex);
+                if (utilindex>TAILLE_TABS)
+                {
+                    printf("erreur, la base de donnees ne contient pas autant d'utilisateur\n utilisateur %d, maxutilisateur %d\n",utilindex,TAILLE_TABS);
+                    return 1;
+                }
+                print1Util(utilindex);
+                printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");
                 scanf("%d",&choixgest);
-                if (choixgest==1)  //consulter et modifier nbre vehicules
+
+                if (choixgest==1)
                 {
-                    int compteur;//nbres de voitures a enlever ou ajouter
-                    printf("choisissez la station a modifier\n");
-                    scanf("%d",&stationindex);
-                    if ((stationindex==0)||(stationindex>TAILLE_TABS))
-                    {
-                        printf("erreur, la base de donnees ne contient pas autant de station\n Station %d, MaxStation%d\n",stationindex,TAILLE_TABS);
-                        return 1;
-
-                    }
-
-                    printf("combien de voitures voulez vous enlevez ou ajouter?\n");
-                    scanf("%d",&compteur);
-                    tabstation[stationindex].nbrevoitures=tabstation[stationindex].nbrevoitures+compteur;
-                    if (tabstation[stationindex].nbrevoitures<0)
-                    {
-                        tabstation[stationindex].nbrevoitures=0;
-                    }
-
-
+                    sauve.tabutil[utilindex].abonnement=0;
+                    print1Util(utilindex);
 
                 }
-                else if (choixgest==2)  // consulter et modifier comptes utilisateurs
+                else if (choixgest==2)
                 {
-
-                    printf("choisissez l'utilisateur a modifier\n");
-                    scanf("%d",&utilindex);
-                    if (utilindex>taille)
-                    {
-                        printf("erreur, la base de donnees ne contient pas autant d'utilisateur\n utilisateur %d, maxutilisateur %d\n",utilindex,taille);
-                        return 1;
-                    }
-                    print1Util(utilindex);
-                    printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");
-                    scanf("%d",&choixgest);
-
-                    if (choixgest==1)
-                    {
-                        tabutil[utilindex].abonnement=0;
-                        print1Util(utilindex);
-
-                    }
-                    else if (choixgest==2)
-                    {
-                        //printf("%s-%d\n",__FILE__,__LINE__);
-                        //return 0;
-
-                    }
-                    else
-                    {
-                        //printf("%s-%d\n",__FILE__,__LINE__);
-                        printf("erreur, recommencer. taper 1 ou 2\n");
-                        return 1;
-                    }
-
+                    //printf("%s-%d\n",__FILE__,__LINE__);
+                    //return 0;
 
                 }
                 else
@@ -370,11 +351,20 @@ int main()
                     return 1;
                 }
 
+
             }
-            //printf("%s-%d\n",__FILE__,__LINE__);
+            else
+            {
+                //printf("%s-%d\n",__FILE__,__LINE__);
+                printf("erreur, recommencer. taper 1 ou 2\n");
+                return 1;
+            }
 
         }
-        while ( cpt!=3);
-
         //printf("%s-%d\n",__FILE__,__LINE__);
+
     }
+    while ( cpt!=3);
+
+    //printf("%s-%d\n",__FILE__,__LINE__);
+}

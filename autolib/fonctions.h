@@ -8,7 +8,7 @@
 #define valueStr( myvar) STRINGIFY(myvar##_), myvar
 #define my_printStr( myvar) printf("%s\t= %s\n",valueInt( myvar))
 
-#define taille 30
+#define TAILLE_NOM 30
 #define TAILLE_TABS 7
 
 extern void init_utils_et_stations();
@@ -25,9 +25,9 @@ struct utilisateur
 {
 
     int numdossier;
-    char nom[taille];
+    char nom[TAILLE_NOM];
     int abonnement;//0=pas abo 1=abo
-    char mdp[taille];//mot de passe
+    char mdp[TAILLE_NOM];//mot de passe
     int station;//station ou se trouve l'utilisateur
     int voiture;//0=pieds 1=voiture
 };
@@ -46,11 +46,17 @@ struct station
 };
 struct gestionnaire
 {
-    char nom[taille];
-    char mdp[taille];//mot de passe
+    char nom[TAILLE_NOM];
+    char mdp[TAILLE_NOM];//mot de passe
 
 };
 
-
+struct t_sauve
+{
+    struct station      tabstation[TAILLE_TABS];
+    struct utilisateur  tabutil[TAILLE_TABS];
+    int                 nombre_utilisateurs_deja_enregistres;
+};
+extern struct t_sauve sauve;
 
 #endif // FONCTIONS_H_INCLUDED

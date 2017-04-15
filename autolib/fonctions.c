@@ -2,32 +2,29 @@
 #include <stdlib.h>
 #include "fonctions.h"
 
-extern struct station tabstation[];
-extern struct utilisateur tabutil[];
-extern int nombre_utilisateurs_deja_enregistres;
 extern struct gestionnaire tabgest[];
 extern int nbregest;
 extern int NombresStation;
 
 void print1Util(int i)
 {
-    printf("\ntabutil[%d]\n", i);
-    printf("\t.nom=%s\n",tabutil[i].nom);
-    printf("\t.numdossier=%d\n",tabutil[i].numdossier);
-    printf("\t.mdp=%s\n",tabutil[i].mdp);
-    printf("\t.abonnement=%d\n",tabutil[i].abonnement);
-    printf("\t.voiture=%d\n",tabutil[i].voiture);
-    printf("\t.station=%d\n",tabutil[i].station);
+    printf("\nsauve.tabutil[%d]\n", i);
+    printf("\t.nom=%s\n",sauve.tabutil[i].nom);
+    printf("\t.numdossier=%d\n",sauve.tabutil[i].numdossier);
+    printf("\t.mdp=%s\n",sauve.tabutil[i].mdp);
+    printf("\t.abonnement=%d\n",sauve.tabutil[i].abonnement);
+    printf("\t.voiture=%d\n",sauve.tabutil[i].voiture);
+    printf("\t.station=%d\n",sauve.tabutil[i].station);
 }
 
 void printUtil()
 {
     int i;
     printf("\n%s-%d printUtil\n",__FILE__,__LINE__);
-    printf("nombre_utilisateurs_deja_enregistres =%d",nombre_utilisateurs_deja_enregistres);
-    for(i=0; i<nombre_utilisateurs_deja_enregistres; i++)
+    printf("nombre_utilisateurs_deja_enregistres =%d",sauve.nombre_utilisateurs_deja_enregistres);
+    for(i=0; i<sauve.nombre_utilisateurs_deja_enregistres; i++)
     {
-        if(tabutil[i].abonnement==1)
+        if(sauve.tabutil[i].abonnement==1)
         {
             print1Util(i);
         }
@@ -36,10 +33,10 @@ void printUtil()
 
 void print1Station(int i)
 {
-    printf("\ntabstation[%d]\n", i);
-    printf("\t.places=%d\n",tabstation[i].places);
-    printf("\t.nbrevoitures=%d\n",tabstation[i].nbrevoitures);
-    printf("\t.station=%d\n",tabstation[i].station);
+    printf("\nsauve.tabstation[%d]\n", i);
+    printf("\t.places=%d\n",sauve.tabstation[i].places);
+    printf("\t.nbrevoitures=%d\n",sauve.tabstation[i].nbrevoitures);
+    printf("\t.station=%d\n",sauve.tabstation[i].station);
 }
 
 void printStation()
@@ -69,10 +66,10 @@ int utilisateur_deja_enregistre(char *nom_test)
 {
     int i;
     printf("nom_test=%s",nom_test);
-    for(i=0; i<nombre_utilisateurs_deja_enregistres; i++)
+    for(i=0; i<sauve.nombre_utilisateurs_deja_enregistres; i++)
     {
-        printf("tabutil[%d].nom\t= %s\n", i, tabutil[i].nom);
-        if(strcmp(tabutil[i].nom,nom_test)==0)
+        printf("sauve.tabutil[%d].nom\t= %s\n", i, sauve.tabutil[i].nom);
+        if(strcmp(sauve.tabutil[i].nom,nom_test)==0)
         {
             printf("\n:) Trouve![%d]\n", i);
             return i;
@@ -102,41 +99,41 @@ int gestvalide(char *nom_test)
 
 void init_utils_et_stations()
 {
-    tabstation[1].station=1;
-    tabstation[1].places=17;
-    tabstation[1].nbrevoitures=1;
+    sauve.tabstation[1].station=1;
+    sauve.tabstation[1].places=17;
+    sauve.tabstation[1].nbrevoitures=1;
 
-    tabstation[2].station=2;
-    tabstation[2].places=16;
-    tabstation[2].nbrevoitures=2;
+    sauve.tabstation[2].station=2;
+    sauve.tabstation[2].places=16;
+    sauve.tabstation[2].nbrevoitures=2;
 
-    tabstation[3].station=3;
-    tabstation[3].places=0;
-    tabstation[3].nbrevoitures=0;
+    sauve.tabstation[3].station=3;
+    sauve.tabstation[3].places=0;
+    sauve.tabstation[3].nbrevoitures=0;
 
-    tabstation[4].station=4;
-    tabstation[4].places=16;
-    tabstation[4].nbrevoitures=2;
+    sauve.tabstation[4].station=4;
+    sauve.tabstation[4].places=16;
+    sauve.tabstation[4].nbrevoitures=2;
 
-    tabstation[5].station=5;
-    tabstation[5].places=16;
-    tabstation[5].nbrevoitures=2;
+    sauve.tabstation[5].station=5;
+    sauve.tabstation[5].places=16;
+    sauve.tabstation[5].nbrevoitures=2;
 
-    nombre_utilisateurs_deja_enregistres = 0;
-    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom,"toto");
-    tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 65;
-    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"cool");
-    tabutil[nombre_utilisateurs_deja_enregistres].station=4;
-    tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
-    tabutil[nombre_utilisateurs_deja_enregistres].abonnement=1;
-    nombre_utilisateurs_deja_enregistres++;
-    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].nom,"tata");
-    tabutil[nombre_utilisateurs_deja_enregistres].numdossier = 66;
-    strcpy(&tabutil[nombre_utilisateurs_deja_enregistres].mdp,"gros");
-    tabutil[nombre_utilisateurs_deja_enregistres].station=2;
-    tabutil[nombre_utilisateurs_deja_enregistres].voiture=0;
-    tabutil[nombre_utilisateurs_deja_enregistres].abonnement=1;
-    nombre_utilisateurs_deja_enregistres++;
+    sauve.nombre_utilisateurs_deja_enregistres = 0;
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom,"toto");
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 65;
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp,"cool");
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=4;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+    sauve.nombre_utilisateurs_deja_enregistres++;
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom,"tata");
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 66;
+    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp,"gros");
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=2;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+    sauve.nombre_utilisateurs_deja_enregistres++;
     printUtil();
 
     nbregest=0;
@@ -155,3 +152,41 @@ int abs(int distance)
     return distance;
 
 }
+
+/*void SaveState(TPlayerState PlayerState)
+{
+    // Open the file for writing binary
+    FILE *fSaveFile = fopen("SaveFile.bin", "wb");
+
+    if (fSaveFile)
+    {
+        // Write the structure to the file
+        fwrite(&PlayerState, sizeof(TPlayerState), 1, fSaveFile);
+        fclose(fSaveFile);
+    }
+    else
+    {
+        printf("Error opening savefile!\n");
+    }
+}
+
+// Loads a players state.  You'd call this with a pointer to the Player's State, like this:
+// RestoreState(&PlayerState);
+void RestoreState(TPlayerState *pPlayerState)
+{
+    // Open the file for reading binary
+    FILE *fLoadFile = fopen("SaveFile.bin", "rb");
+
+    if (fLoadFile)
+    {
+        // read the structure from the file
+        fread(pPlayerState, sizeof(TPlayerState), 1, fLoadFile);
+        fclose(fLoadFile);
+    }
+    else
+    {
+        printf("Error opening savefile!\n");
+    }
+}*/
+
+
