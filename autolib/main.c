@@ -33,6 +33,7 @@ int main()
 
     init_utils_et_stations(); // de toutes facon on initialise la structure
     RestoreState(&sauve); // si jamis on trouve un fichier Savefile.bin, on initialise la structure avec ce que l'on trouve dedans
+    printUtil();
     do   //pour tout recommencer
     {
         //Demander la nature de la personne (gestionnaire, utilisateur)
@@ -57,12 +58,13 @@ int main()
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
             utilindex = utilisateur_deja_enregistre(nom_temp);
-            print1Util(utilindex);
-            if (sauve.tabutil[utilindex].abonnement==1)
-            {
-                if(utilindex!=777)
 
+            if(utilindex!=777)
+
+            {
+                if (sauve.tabutil[utilindex].abonnement==1)
                 {
+
                     if(oldutilindex!=utilindex)
                     {
                         printf("tapez votre mot de passe?\n");
@@ -87,176 +89,177 @@ int main()
                         print1Util(utilindex);
                     }
                 }
+
                 else
                 {
-                    printf("Nouvel utilisateur!\n");
 
-                    printf("choisissez votre mot de passe ?\n");
-                    scanf("%s",&(mdp_temp[0]));
-                    printf("votre numero de dossier est %d\n",numdossier);
-
-                    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],nom_temp);
-                    strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],mdp_temp);
-                    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 100+sauve.nombre_utilisateurs_deja_enregistres;
-                    sauve.nombre_utilisateurs_deja_enregistres++;
-                    printUtil();
-                    utilindex = sauve.nombre_utilisateurs_deja_enregistres;
-                    sauve.tabutil[utilindex].abonnement=1;
+                    printf("vous n'avez plus d'abonnement");
+                    return 1;
                 }
-                oldutilindex=utilindex;
+            }
+            else
+            {
+                printf("Nouvel utilisateur!\n");
+
+                printf("choisissez votre mot de passe ?\n");
+                scanf("%s",&(mdp_temp[0]));
+                printf("votre numero de dossier est %d\n",numdossier);
+
+                strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],nom_temp);
+                strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],mdp_temp);
+                sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 100+sauve.nombre_utilisateurs_deja_enregistres;
+                sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+                sauve.nombre_utilisateurs_deja_enregistres++;
+                printUtil();
+                utilindex = sauve.nombre_utilisateurs_deja_enregistres;
+            }
+            oldutilindex=utilindex;
 
 
-                scanf("%c",&junk); // purge le buffer de scanf
-                printf("Que voulez vous faire ?\n ");
-                if (sauve.tabutil[utilindex].voiture==0)
-                {
-                    printf("\ta) Louer un vehicule\n");
-
-                }
-                else
-                {
-                    printf("\tb) rendre un vehicule\n ");
-
-                }
-                printf("\tc) consulter et modifier mon statut\n\td) je sors\n");
-
-                scanf("%c",&choixUtil);
-
-                // on ne verifie pas que l'utilisateur tape un choix interdit. C'est mal.
-                if (choixUtil=='a')
-
-                {
-                    printf("entrez le numero de la station\n");//demander la station
-                    scanf("%d",&stationindex);
-                    sauve.tabutil[utilindex].station = stationindex;
-
-
-                    if (sauve.tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
-                    {
-                        print1Station(stationindex);
-
-                        //l'attribuer a l'utilisateur
-                        printf("une voiture vous a ete attribue\n");
-                        sauve.tabutil[utilindex].voiture=1;
-                        sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places+1;
-                        sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures-1;
-                        print1Station(stationindex);
-                    }
-
-                    else
-                    {
-                        int cptstation;
-                        int distancetampon;
-                        int distanceminimum;
-                        int indexminimum;
-                        distanceminimum=666;
-                        indexminimum=666;
-
-                        for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
-                        {
-                            if(sauve.tabstation[cptstation].nbrevoitures!=0)
-                            {
-                                distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
-                                if(distancetampon<distanceminimum)
-                                {
-                                    distanceminimum=distancetampon;
-                                    indexminimum=cptstation;
-                                }
-                            }
-                        }
-                        printf("vous devez aller chercher une voiture a la station %d\n",sauve.tabstation[indexminimum].station);
-
-                    }
-                }
-                else if (choixUtil=='b')
-                {
-                    printf("bonjour, entrez le numero de la station\n");
-                    scanf("%d",&stationindex);//demander la station
-                    sauve.tabutil[utilindex].station = stationindex;
-                    print1Station(stationindex);
-                    if (sauve.tabstation[stationindex].places!=0) //verifier qu'il y a de la place
-                    {
-                        sauve.tabutil[utilindex].voiture=0;
-                        sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places-1;
-                        sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+1;
-
-                        printf("combien de temps avez vous mis ?\n en minutes :");//demander le temps du trajet
-                        scanf("%d",&temps);//afficher le prix et le deduire du compte
-                        if(temps<=30)
-                        {
-                            temps=0;
-                            printf("une facture de %d euro vous sera envoyee\n",temps);
-                        }
-                        else
-                        {
-                            temps=(temps-30);
-                            printf("une facture de %d euros vous sera envoyee\n",temps);
-                        }
-
-
-                    }
-                    else //sinon chercher la place la plus proche
-
-                    {
-                        int cptstation;
-                        int distancetampon;
-                        int distanceminimum;
-                        int indexminimum;
-                        distanceminimum=666;
-                        indexminimum=666;
-
-                        for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
-                        {
-                            if(sauve.tabstation[cptstation].places!=0)
-                            {
-                                distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
-                                if(distancetampon<distanceminimum)
-                                {
-                                    distanceminimum=distancetampon;
-                                    indexminimum=cptstation;
-                                }
-                            }
-
-
-                        }
-                        printf("vous devez aller rendre la voiture a la station %d\n",sauve.tabstation[indexminimum].station);
-                    }
-                }
-
-                else if (choixUtil=='c')
-                {
-
-                    //afficher les informations de l'utilisateurs
-                    int choix;
-                    print1Util(utilindex);
-                    printf("voulez vous annuler votre abonnement ?\n \t1)Oui 2)Non\n");
-                    scanf("%d",&choix);
-                    if (choix==1)
-                    {
-                        sauve.tabutil[utilindex].abonnement=0;
-                        print1Util(utilindex);
-                    }
-
-                }
-                else if (choixUtil=='d')
-                {
-                    printf("%c Je sors\n",choixUtil);
-                    return 0;
-
-                }
-                else
-                {
-                    printf("%c recommencer\n",choixUtil);
-                }
-
+            scanf("%c",&junk); // purge le buffer de scanf
+            printf("Que voulez vous faire ?\n ");
+            if (sauve.tabutil[utilindex].voiture==0)
+            {
+                printf("\ta) Louer un vehicule\n");
 
             }
             else
             {
+                printf("\tb) rendre un vehicule\n ");
 
-                printf("vous n'avez plus d'abonnement");
-                return 1;
             }
+            printf("\tc) consulter et modifier mon statut\n\td) je sors\n");
+
+            scanf("%c",&choixUtil);
+
+            // on ne verifie pas que l'utilisateur tape un choix interdit. C'est mal.
+            if (choixUtil=='a')
+
+            {
+                printf("entrez le numero de la station\n");//demander la station
+                scanf("%d",&stationindex);
+                sauve.tabutil[utilindex].station = stationindex;
+
+
+                if (sauve.tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
+                {
+                    print1Station(stationindex);
+
+                    //l'attribuer a l'utilisateur
+                    printf("une voiture vous a ete attribue\n");
+                    sauve.tabutil[utilindex].voiture=1;
+                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places+1;
+                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures-1;
+                    print1Station(stationindex);
+                }
+
+                else
+                {
+                    int cptstation;
+                    int distancetampon;
+                    int distanceminimum;
+                    int indexminimum;
+                    distanceminimum=666;
+                    indexminimum=666;
+
+                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
+                    {
+                        if(sauve.tabstation[cptstation].nbrevoitures!=0)
+                        {
+                            distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
+                            if(distancetampon<distanceminimum)
+                            {
+                                distanceminimum=distancetampon;
+                                indexminimum=cptstation;
+                            }
+                        }
+                    }
+                    printf("vous devez aller chercher une voiture a la station %d\n",sauve.tabstation[indexminimum].station);
+
+                }
+            }
+            else if (choixUtil=='b')
+            {
+                printf("bonjour, entrez le numero de la station\n");
+                scanf("%d",&stationindex);//demander la station
+                sauve.tabutil[utilindex].station = stationindex;
+                print1Station(stationindex);
+                if (sauve.tabstation[stationindex].places!=0) //verifier qu'il y a de la place
+                {
+                    sauve.tabutil[utilindex].voiture=0;
+                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places-1;
+                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+1;
+
+                    printf("combien de temps avez vous mis ?\n en minutes :");//demander le temps du trajet
+                    scanf("%d",&temps);//afficher le prix et le deduire du compte
+                    if(temps<=30)
+                    {
+                        temps=0;
+                        printf("une facture de %d euro vous sera envoyee\n",temps);
+                    }
+                    else
+                    {
+                        temps=(temps-30);
+                        printf("une facture de %d euros vous sera envoyee\n",temps);
+                    }
+
+
+                }
+                else //sinon chercher la place la plus proche
+
+                {
+                    int cptstation;
+                    int distancetampon;
+                    int distanceminimum;
+                    int indexminimum;
+                    distanceminimum=666;
+                    indexminimum=666;
+
+                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
+                    {
+                        if(sauve.tabstation[cptstation].places!=0)
+                        {
+                            distancetampon=abs(sauve.tabstation[cptstation].station-sauve.tabstation[stationindex].station);
+                            if(distancetampon<distanceminimum)
+                            {
+                                distanceminimum=distancetampon;
+                                indexminimum=cptstation;
+                            }
+                        }
+
+
+                    }
+                    printf("vous devez aller rendre la voiture a la station %d\n",sauve.tabstation[indexminimum].station);
+                }
+            }
+
+            else if (choixUtil=='c')
+            {
+
+                //afficher les informations de l'utilisateurs
+                int choix;
+                print1Util(utilindex);
+                printf("voulez vous annuler votre abonnement ?\n \t1)Oui 2)Non\n");
+                scanf("%d",&choix);
+                if (choix==1)
+                {
+                    sauve.tabutil[utilindex].abonnement=0;
+                    print1Util(utilindex);
+                }
+
+            }
+            else if (choixUtil=='d')
+            {
+                printf("%c Je sors\n",choixUtil);
+                break;
+
+            }
+            else
+            {
+                printf("%c recommencer\n",choixUtil);
+            }
+
+
         }
         else if (cpt==2)//si gestonnaire
         {
@@ -278,7 +281,7 @@ int main()
                     else
                     {
                         printf("  Mauvais mot de passe\n");
-                        return 1;
+                        break;
                     }
                 }
                 else
@@ -304,7 +307,7 @@ int main()
                 if ((stationindex==0)||(stationindex>TAILLE_TABS))
                 {
                     printf("erreur, la base de donnees ne contient pas autant de station\n Station %d, MaxStation%d\n",stationindex,TAILLE_TABS);
-                    return 1;
+                    break;
 
                 }
 
@@ -327,7 +330,7 @@ int main()
                 if (utilindex>TAILLE_TABS)
                 {
                     printf("erreur, la base de donnees ne contient pas autant d'utilisateur\n utilisateur %d, maxutilisateur %d\n",utilindex,TAILLE_TABS);
-                    return 1;
+                    break;
                 }
                 print1Util(utilindex);
                 printf("voulez vous supprimer l'utilisateur ?\n \t1)Oui\n \t2)Non\n");

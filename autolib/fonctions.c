@@ -135,7 +135,6 @@ void init_utils_et_stations()
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
     sauve.nombre_utilisateurs_deja_enregistres++;
-    printUtil();
 
     nbregest=0;
     strcpy(&tabgest[nbregest].nom[0],"stella");
