@@ -98,7 +98,7 @@ int main()
         REGLES(nomj);
 
     }
-    printf("Sur quelle taille de grille souhaites tu jouer (grille carr%e)? \n",130);
+    printf("Sur quelle taille de grille souhaites tu jouer (grille carr%ce)? \n",130);
     scanf("%d",&taille);
     while (taille<3||taille>12)
     {
@@ -141,7 +141,7 @@ int main()
         massemax=128;
         break;
     case 4 :
-        massemax=254;
+        massemax=256;
         break;
     case 5 :
         massemax=512;
