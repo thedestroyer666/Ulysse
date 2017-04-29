@@ -16,6 +16,8 @@ void print1Util(int i)
     printf("\t.abonnement=%d\n",sauve.tabutil[i].abonnement);
     printf("\t.voiture=%d\n",sauve.tabutil[i].voiture);
     printf("\t.station=%d\n",sauve.tabutil[i].station);
+    printf("\t.facture=%d\n",sauve.tabutil[i].facture);
+    printf("\t.nbretrajet=%d\n",sauve.tabutil[i].nbretrajet);
 }
 
 void printUtil()
@@ -127,13 +129,18 @@ void init_utils_et_stations()
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=4;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].facture=0;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nbretrajet=0;
     sauve.nombre_utilisateurs_deja_enregistres++;
+
     strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nom[0],"tata");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 66;
     strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],"gros");
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].station=2;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].voiture=0;
     sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].facture=0;
+    sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nbretrajet=0;
     sauve.nombre_utilisateurs_deja_enregistres++;
 
     nbregest=0;

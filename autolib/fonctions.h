@@ -10,10 +10,12 @@ struct utilisateur
 
     int numdossier;
     char nom[TAILLE_NOM];
-    int abonnement;//0=pas abo 1=abo
-    char mdp[TAILLE_NOM];//mot de passe
-    int station;//station ou se trouve l'utilisateur
-    int voiture;//0=pieds 1=voiture
+    int abonnement;         //0=pas abo 1=abo
+    char mdp[TAILLE_NOM];   //mot de passe
+    int station;            //station ou se trouve l'utilisateur
+    int voiture;            //0=pieds 1=voiture
+    int facture;            //nombre total du cout
+    int nbretrajet;         //nombre total de trajet
 };
 
 struct voiture

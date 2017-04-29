@@ -22,7 +22,7 @@ int main()
     char nom_temp[TAILLE_NOM];  //quand on lit un nom
     char mdp_temp[TAILLE_NOM];  //quand on lit un mot de passe
     char choixUtil;             //coix abcd de l'utilisateur
-    char junk;                  //pour debuguer car abcd caractères et enter aussi
+    char junk;                  // pour purger le buffer d'entree
     int utilindex=888;          //l'index de l'utilisateur
     int oldutilindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
     int gestindex=888;          //l'index du gestionnaire
@@ -109,9 +109,11 @@ int main()
                 strcpy(&sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].mdp[0],mdp_temp);
                 sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].numdossier = 100+sauve.nombre_utilisateurs_deja_enregistres;
                 sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].abonnement=1;
+                sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].facture=0;
+                sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nbretrajet=0;
+                utilindex = sauve.nombre_utilisateurs_deja_enregistres;
                 sauve.nombre_utilisateurs_deja_enregistres++;
                 printUtil();
-                utilindex = sauve.nombre_utilisateurs_deja_enregistres;
             }
             oldutilindex=utilindex;
 
@@ -195,15 +197,14 @@ int main()
                     if(temps<=30)
                     {
                         temps=0;
-                        printf("une facture de %d euro vous sera envoyee\n",temps);
                     }
                     else
                     {
                         temps=(temps-30);
-                        printf("une facture de %d euros vous sera envoyee\n",temps);
+                        sauve.tabutil[utilindex].facture=sauve.tabutil[utilindex].facture+temps;
                     }
-
-
+                    sauve.tabutil[utilindex].nbretrajet=sauve.tabutil[utilindex].nbretrajet+1;
+                    printf("une facture de %d euros vous sera envoyee\n",temps);
                 }
                 else //sinon chercher la place la plus proche
 
