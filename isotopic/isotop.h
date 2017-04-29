@@ -44,6 +44,7 @@ void MVMT_DROITE (struct square **tab, int taille, int *casevide); //Déplacement
 void MVMT_BAS (struct square **tab, int taille, int *casevide); //Déplacement bas
 void MVMT_HAUT(struct square **tab, int taille, int *casevide); // Déplacement haut
 void MVMT_GAUCHE (struct square **tab, int taille, int *casevide); //Déplacement gauche
+void DUREE_DE_VIE(struct square **tab, int taille, int *casevide); // gestion de la durée de vie des éléments
 void SAUVEGARDE_PARTIE(struct square **tab, int taille, char nomj[NBRE_LETTRE], int massemax, int casevide);
 void CHARGEMENT_PARTIE(struct square ***tab,int*taille,int*massemax, int*casevide,char *nomj[NBRE_LETTRE]);
 void CHARGEMENT_SCORE(int *taille, int *massemax, char *nomj[NBRE_LETTRE]);

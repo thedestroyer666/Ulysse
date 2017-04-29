@@ -23,7 +23,7 @@
 
 */
 
-    //char nomj[NBRE_LETTRE];//Nom
+//char nomj[NBRE_LETTRE];//Nom
 
 
 
@@ -83,13 +83,13 @@ int main()
     printf("Bonjour %s, souhaites tu avoir un rappel des r%cgles du jeu avant \nde d%cbuter une partie?\n",&nomj,138,130);
     COULEUR(4,15);
     while(regle!=2 && regle!=1)
+    {
+        printf("1. OUI \n2. NON \n");
+        scanf("%d",&regle);
+        if (regle!=2 && regle!=1)
         {
-            printf("1. OUI \n2. NON \n");
-            scanf("%d",&regle);
-            if (regle!=2 && regle!=1)
-            {
-                printf("Erreur, choix non disponible \n");
-            }
+            printf("Erreur, choix non disponible \n");
+        }
     }
 
 
@@ -129,7 +129,7 @@ int main()
         printf("Le score demand%c n'existe pas.\nQuel score souhaites tu atteindre ?\n",130);
         scanf("%d",&massemax);
     }
-      switch(massemax) //Redonner la bonne valeur à la variable massemax
+    switch(massemax) //Redonner la bonne valeur à la variable massemax
     {
     case 1 :
         massemax=32;
@@ -160,71 +160,74 @@ int main()
 
         while(indiceloose!=1 && indicewin!=1) //Tant qu'il reste des possibilités de jeu
         {
-                if(casevide==0) //Si il n'y a plus de cases disponibles
-                {
-                    COULEUR(15,4);
-                    AFFICHER_TAB(tab,taille); //SP d'affichage tableau
-                    COULEUR(0,15);
-                }
-                else {AFFICHER_TAB(tab,taille);} //SP D'affichage tableau
-                printf("Cases vides : %d\n",casevide); //Affichage du nombre de cases vides restantes
-                printf("Coups jou%cs :%d\n",130,coups); //Affichage du nombre de coups joués
-                printf("2.H  4.He  8.Be  16.0  32.P  64.Ni  128.Sn  256.No  512.Ra  1024.Xe"); //Rappel des valeurs
-
-                COULEUR(15,0);
-                printf("\n\n HAUT:8 BAS:2 DROITE:6 GAUCHE:4\n"); //Quelle direction voulue
+            if(casevide==0) //Si il n'y a plus de cases disponibles
+            {
+                COULEUR(15,4);
+                AFFICHER_TAB(tab,taille); //SP d'affichage tableau
                 COULEUR(0,15);
-                scanf("%d",&direction); //Incrément directions
-                while(direction!=2 && direction!=4 && direction!=6 && direction!=8) //Vérification de validité de la direction
-                {
-                    COULEUR(15,0);
-                    printf("Erreur de direction\n");
-                    COULEUR(4,15);
-                    printf("HAUT:8 \nBAS:2 \nDROITE:6 \nGAUCHE:4 ");
-                    scanf("%d",&direction);
-                    COULEUR(0,15);
-                }
-                printf("\n\n");
-                if(direction==8) //Haut
-                {
-                    MVMT_HAUT(tab,taille,&casevide); //SP de déplacement
-                }
-                else if(direction==4) //Gauche
-                {
-                    MVMT_GAUCHE(tab,taille,&casevide); //SP de déplacement
+            }
+            else
+            {
+                AFFICHER_TAB(tab,taille);   //SP D'affichage tableau
+            }
+            printf("Cases vides : %d\n",casevide); //Affichage du nombre de cases vides restantes
+            printf("Coups jou%cs :%d\n",130,coups); //Affichage du nombre de coups joués
+            printf("2.H  4.He  8.Be  16.0  32.P  64.Ni  128.Sn  256.No  512.Ra  1024.Xe"); //Rappel des valeurs
 
-                }
-
-                else if (direction==6) //Droite
-                {
-                    MVMT_DROITE(tab,taille,&casevide); //SP de déplacement
-
-                }
-                else if (direction==2) //Bas
-                {
-                    MVMT_BAS(tab,taille,&casevide); //SP de déplacement
-
-                }
-
-
-                coups++; //Nombre de coups joués
-
-                if (coups>=10) //Impossible d'obtenir le score visé avant 10 coups
-                {
-                    YOU_WIN(tab,taille,massemax,&indicewin); //SP de vérification du plus grand élément obtenu dans le tableau
-                }
-
-                if (casevide!=0 && indicewin!=1) //indicewin vaut 1 si le score visé est atteint
-                {
-                    POP_NBRE_ALEATOIRE(tab,taille,&casevide); //SP d'apparition d'un nombre aléatoire
-                }
-                else if (casevide==0) //plus de case vide
-                {
-                    GAME_OVER(tab,taille,&indiceloose); //Vérifier si il reste des possibilités de jouer
-                }
-
+            COULEUR(15,0);
+            printf("\n\n HAUT:8 BAS:2 DROITE:6 GAUCHE:4\n"); //Quelle direction voulue
+            COULEUR(0,15);
+            scanf("%d",&direction); //Incrément directions
+            while(direction!=2 && direction!=4 && direction!=6 && direction!=8) //Vérification de validité de la direction
+            {
+                COULEUR(15,0);
+                printf("Erreur de direction\n");
+                COULEUR(4,15);
+                printf("HAUT:8 \nBAS:2 \nDROITE:6 \nGAUCHE:4 ");
+                scanf("%d",&direction);
+                COULEUR(0,15);
+            }
+            printf("\n\n");
+            if(direction==8) //Haut
+            {
+                MVMT_HAUT(tab,taille,&casevide); //SP de déplacement
+            }
+            else if(direction==4) //Gauche
+            {
+                MVMT_GAUCHE(tab,taille,&casevide); //SP de déplacement
 
             }
+
+            else if (direction==6) //Droite
+            {
+                MVMT_DROITE(tab,taille,&casevide); //SP de déplacement
+
+            }
+            else if (direction==2) //Bas
+            {
+                MVMT_BAS(tab,taille,&casevide); //SP de déplacement
+
+            }
+            DUREE_DE_VIE(tab,taille,&casevide);
+
+            coups++; //Nombre de coups joués
+
+            if (coups>=10) //Impossible d'obtenir le score visé avant 10 coups
+            {
+                YOU_WIN(tab,taille,massemax,&indicewin); //SP de vérification du plus grand élément obtenu dans le tableau
+            }
+
+            if (casevide!=0 && indicewin!=1) //indicewin vaut 1 si le score visé est atteint
+            {
+                POP_NBRE_ALEATOIRE(tab,taille,&casevide); //SP d'apparition d'un nombre aléatoire
+            }
+            else if (casevide==0) //plus de case vide
+            {
+                GAME_OVER(tab,taille,&indiceloose); //Vérifier si il reste des possibilités de jouer
+            }
+
+
+        }
 
 
 
@@ -274,10 +277,10 @@ int main()
 
             }
             else if(keepplay==1)
-                {
+            {
                 printf("Merci d'avoir joué %c Isotopic 256,%c bient%ct\n",133,133,147);
                 //sleep(5000);
-                }
+            }
         }
 
         if(indiceloose==1) //Lorsque la partie est perdue
@@ -328,7 +331,7 @@ int main()
 
 
 
-        }
+    }
 
 
     return 0;

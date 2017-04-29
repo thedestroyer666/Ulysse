@@ -74,6 +74,7 @@ void REMPLISSAGE_TABLEAU_DEBUT(struct square **tab,int taille)
         for (cptcolonne=0; cptcolonne<=(taille-1); cptcolonne++)
         {
             tab[cptligne][cptcolonne].valeur=0;
+            tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE;//initialiser le décompte
         }
     }
     //Premier remplissage aléatoire
@@ -156,24 +157,15 @@ void MVMT_GAUCHE (struct square **tab, int taille,int *casevide) //Mouvement gau
                 }
                 tab[cptligne][taille-1].valeur=0; // Remplir la dernière case par un 0.
                 tab[cptligne][taille-1].decompte=NBRE_DECOMPTE;
+                indic=(indic-2);
+            }
+            else
+            {
+                indic=(indic-1);
             }
             cptcolonne++;
-
-            indic=(indic-2);
-        }
-
-        for(cptcolonne=0; cptcolonne<taille; cptcolonne++)
-        {
-            if(tab[cptligne][cptcolonne].decompte==0) //Si l'isotope instable arrive en fin de vie
-            {
-                tab[cptligne][cptcolonne].valeur=0; //Faire disparaitre cet isotope
-                tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE;//Réinitialiser le décompte
-                *casevide=(*casevide)+1;
-            }
         }
     }
-
-
 }
 
 void MVMT_DROITE(struct square **tab, int taille,int *casevide)
@@ -221,13 +213,13 @@ void MVMT_DROITE(struct square **tab, int taille,int *casevide)
             {
                 tab[cptligne][cptcolonne].decompte=(tab[cptligne][cptcolonne].decompte)-1; //Le décompte diminue d'un
             }
-            printf("%d cptligne[%d], indic[%d], tab[%d][%d].valeur=%d, tab[%d][%d].valeur=%d \n", __LINE__,cptligne,indic, cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
-                   cptligne,cptcolonne-1, tab[cptligne][cptcolonne-1].valeur );
+            /*printf("%d cptligne[%d], indic[%d], tab[%d][%d].valeur=%d, tab[%d][%d].valeur=%d \n", __LINE__,cptligne,indic, cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
+                   cptligne,cptcolonne-1, tab[cptligne][cptcolonne-1].valeur );*/
             if((cptcolonne-1)>=0 && tab[cptligne][cptcolonne].valeur!=0 && tab[cptligne][cptcolonne].valeur==tab[cptligne][cptcolonne-1].valeur) //Si le nombre à gauche est le même
             {
                 tab[cptligne][cptcolonne].valeur=(2*tab[cptligne][cptcolonne].valeur); //Fusion des deux élements (multiplication par deux
-                printf("%d cptligne[%d], indic[%d], tab[%d][%d].valeur=%d, tab[%d][%d].valeur=%d \n", __LINE__,cptligne,indic, cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
-                       cptligne,cptcolonne-1, tab[cptligne][cptcolonne-1].valeur );
+                /*printf("%d cptligne[%d], indic[%d], tab[%d][%d].valeur=%d, tab[%d][%d].valeur=%d \n", __LINE__,cptligne,indic, cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
+                       cptligne,cptcolonne-1, tab[cptligne][cptcolonne-1].valeur );*/
                 if(tab[cptligne][cptcolonne].valeur!=16 || tab[cptligne][cptcolonne].valeur!=64)  //Si l'élement n'est pas un isotope instable
                 {
                     tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE; //Réinitialiser le décompte
@@ -250,17 +242,7 @@ void MVMT_DROITE(struct square **tab, int taille,int *casevide)
             }
             cptcolonne--;
 
-            printf("%d cptligne[%d], indic[%d]\n", __LINE__,cptligne,indic);
-        }
-        for(cptcolonne=(taille-1); cptcolonne>=0; cptcolonne--)
-        {
-            if(tab[cptligne][cptcolonne].decompte==0) //Si l'isotope instable arrive en fin de vie
-            {
-                tab[cptligne][cptcolonne].valeur=0; //Faire disparaitre cet isotope
-                tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE;//Réinitialiser le décompte
-                *casevide=(*casevide)+1;
-            }
-
+            //printf("%d cptligne[%d], indic[%d]\n", __LINE__,cptligne,indic);
         }
 
     }
@@ -329,27 +311,15 @@ void MVMT_BAS(struct square **tab, int taille, int *casevide)
                 }
                 tab[0][cptcolonne].valeur=0; //Remplir la première case de la ligne par un 0
                 tab[0][cptcolonne].decompte=NBRE_DECOMPTE;
+                indic=(indic-2);
+            }
+            else
+            {
+                indic=(indic-1);
             }
             cptligne--;
-            indic=(indic-2);
-
         }
-
-
-        for(cptligne=(taille-1); cptligne>=0; cptligne--)
-        {
-            if(tab[cptligne][cptcolonne].decompte==0) //Si l'isotope instable arrive en fin de vie
-            {
-                tab[cptligne][cptcolonne].valeur=0; //Faire disparaitre cet isotope
-                tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE;//Réinitialiser le décompte
-                *casevide=(*casevide)+1;
-            }
-
-        }
-
-
     }
-
 }
 void MVMT_HAUT(struct square **tab, int taille, int *casevide)
 {
@@ -413,25 +383,38 @@ void MVMT_HAUT(struct square **tab, int taille, int *casevide)
                 }
                 tab[taille-1][cptcolonne].valeur=0; //Remplir la première case de la ligne par un 0
                 tab[taille-1][cptcolonne].decompte=NBRE_DECOMPTE;
+                indic=(indic-2);
+            }
+            else
+            {
+                indic=(indic-1);
             }
             cptligne++;
-            indic=(indic-2);
-
-
-
         }
+    }
+}
 
-        for(cptligne=0; cptligne<taille; cptligne++)
+void DUREE_DE_VIE(struct square **tab, int taille, int *casevide)
+{
+    int cptligne,cptcolonne; //Compteur de lignes & colonnes
+    int tampon; //Tampon de valeur
+    int cpt; //Compteur
+    int indic; //Indicateur du nombre d'élements qu'il reste à classer
+    for(cptligne=0; cptligne<taille; cptligne++)//Parcourir le tableau de haut en bas
+    {
+        for(cptcolonne=(taille-1); cptcolonne>=0; cptcolonne--)
         {
+            printf("  %d tab[%d][%d].valeur=%d .decompte=%d \n", __LINE__,cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
+                   tab[cptligne][cptcolonne].decompte );
             if(tab[cptligne][cptcolonne].decompte==0) //Si l'isotope instable arrive en fin de vie
             {
                 tab[cptligne][cptcolonne].valeur=0; //Faire disparaitre cet isotope
                 tab[cptligne][cptcolonne].decompte=NBRE_DECOMPTE;//Réinitialiser le décompte
                 *casevide=(*casevide)+1;
+                printf("* %d tab[%d][%d].valeur=%d .decompte=%d \n", __LINE__,cptligne,cptcolonne, tab[cptligne][cptcolonne].valeur,
+                       tab[cptligne][cptcolonne].decompte );
             }
-
         }
-
     }
 }
 
