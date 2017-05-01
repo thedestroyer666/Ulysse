@@ -7,35 +7,35 @@
 /*struct station sauve.tabstation[TAILLE_TABS];
 struct utilisateur sauve.tabutil[TAILLE_TABS];*/
 
-t_sauve sauve;
+t_sauve sauve; // la fonction pour sauver les structures
 
-//int nombre_utilisateurs_deja_enregistres = 0;
+//int nombre_utilisateurs_deja_enregistres = 0; on a initialisé au tout début quand on commencait le programme
 struct gestionnaire tabgest[TAILLE_TABS];
 int nbregest = 0;
-int temps;//temps du trajet
-int debug = 0; // imprime + ou - d'informations de debug
+int temps; //temps du trajet
+int debug = 1; // imprime + ou - d'informations de debug notamment pour le jeu d'essai
 
 int main()
 {
     int cpt=10 ;
-    int temps=0 ;
-    int numdossier;
+    int temps=0 ; // fonction temps pour calculer le prix des trajets
+    int numdossier; // numéro des dossiers des utilisateurs
     char nom_temp[TAILLE_NOM];  //quand on lit un nom
     char mdp_temp[TAILLE_NOM];  //quand on lit un mot de passe
-    char choixUtil;             //coix abcd de l'utilisateur
-    char junk;                  // pour purger le buffer d'entree
+    char choixUtil;             //choix abcd de l'utilisateur
+    char junk;                  // pour purger le buffer d'entrée
     int utilindex=888;          //l'index de l'utilisateur
-    int oldutilindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
+    int oldutilindex=999;       // pour ne pas a avoir à rentrer deux fois le mdp
     int gestindex=888;          //l'index du gestionnaire
-    int oldgestindex=999;       // pour ne pas a avoir a rentrer deux fois le mdp
+    int oldgestindex=999;       // pour ne pas à avoir à rentrer deux fois le mdp
     int choixgest;              //choix du gestionnaire
     int stationindex;           //station que choisit l'utilisateur ou le gestionnaire
     sauve.nombre_utilisateurs_deja_enregistres = 0;
-    int ok;
+    int ok; //pour les boucles while si jamais il z a un faux mot de passe
 
     init_utils_et_stations(); // de toutes facon on initialise la structure
     RestoreState(&sauve); // si jamis on trouve un fichier Savefile.bin, on initialise la structure avec ce que l'on trouve dedans
-    if (debug==1) printUtil();
+    if (debug==1) printUtil(); //affichage pour les vérif et jeu d'essai
     do   //pour tout recommencer
     {
         //Demander la nature de la personne (gestionnaire, utilisateur)
@@ -47,42 +47,40 @@ int main()
             if (cpt!=1 && cpt!=2 && cpt!=3)
             {
                 printf("Erreur, tapez un chiffre entre 1 et 3 ");
-                scanf("%c",&junk); // purge le buffer de scanf sinon Ã§a boucle
+                scanf("%c",&junk); // purge le buffer de scanf sinon ça boucle à cause de la touche enter
             }
 
         }
-        //while (cpt<=0 || cpt>3);
-        if (cpt==1)
+        if (cpt==1)//Utilisateur
         {
 
             //menu utilisateur
-            //if(new dossier)
             numdossier=0;
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
             utilindex = utilisateur_deja_enregistre(nom_temp);
 
-            if(utilindex!=777)
+            if(utilindex!=777)// on vérifie que l'utilisateur existe
 
             {
-                if (sauve.tabutil[utilindex].abonnement==1)
+                if (sauve.tabutil[utilindex].abonnement==1)//on vérifie que l'utilisateur ait un abonnement
                 {
 
-                    if(oldutilindex!=utilindex)
+                    if(oldutilindex!=utilindex)//on regarde si c'est le même utilisateur qu'avant sinon on lui demande son mot de passe
                     {
                         ok=1;
-                        do
+                        do//boucle pour le not de passe
                         {
 
 
                             printf("Tapez votre mot de passe?\n");
                             scanf("%s",&(mdp_temp[0]));
-                            if (debug==1) print1Util(utilindex);
+                            if (debug==1) print1Util(utilindex); //affichage pour les vérif et jeu d'essai
                             if(strcmp(sauve.tabutil[utilindex].mdp,mdp_temp)==0)
                             {
                                 printf("  Bienvenue\n");
                                 //afficher les informations de l'utilisateurs
-                                if (debug==1) print1Util(utilindex);
+                                if (debug==1) print1Util(utilindex); //affichage pour les vérif et jeu d'essai
                                 ok=0;
                             }
                             else
@@ -96,8 +94,7 @@ int main()
                     else
                     {
                         printf("  C'est toujours vous\n");
-                        //afficher les informations de l'utilisateurs
-                        if (debug==1) printUtil();
+                        if (debug==1) printUtil(); //affichage pour les vérif et jeu d'essai
                     }
                 }
 
@@ -108,7 +105,7 @@ int main()
                     return 1;
                 }
             }
-            else
+            else// si l'utilisateur n'existe pas on en crée un
             {
                 printf("Nouvel utilisateur!\n");
 
@@ -124,14 +121,14 @@ int main()
                 sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nbretrajet=0;
                 utilindex = sauve.nombre_utilisateurs_deja_enregistres;
                 sauve.nombre_utilisateurs_deja_enregistres++;
-                if (debug==1) printUtil();
+                if (debug==1) printUtil(); //affichage pour les vérif et jeu d'essai
             }
             oldutilindex=utilindex;
 
 
             scanf("%c",&junk); // purge le buffer de scanf
             printf("Que voulez vous faire ?\n ");
-            if (sauve.tabutil[utilindex].voiture==0)
+            if (sauve.tabutil[utilindex].voiture==0)//on vérifie si l'utilisateur est déja dans une voiture ou pas pour définir les choix qu'il peut faire
             {
                 printf("\ta) Louer un vehicule\n");
 
@@ -145,11 +142,10 @@ int main()
 
             scanf("%c",&choixUtil);
 
-            // on ne verifie pas que l'utilisateur tape un choix interdit. C'est mal.
             if (choixUtil=='a')
 
             {
-                printf("Entrez le numero de la station\n");//demander la station
+                printf("Entrez le numero de la station\n"); //demander la station
                 scanf("%d",&stationindex);
                 sauve.tabutil[utilindex].station = stationindex;
 
@@ -157,16 +153,14 @@ int main()
                 if (sauve.tabstation[stationindex].nbrevoitures!=0) //verifier si il y a une voiture de disponible dans la station
                 {
                     if (debug==1) print1Station(stationindex);
-
-                    //l'attribuer a l'utilisateur
                     printf("Une voiture vous a ete attribue\n");
-                    sauve.tabutil[utilindex].voiture=1;
-                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places+1;
-                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures-1;
+                    sauve.tabutil[utilindex].voiture=1; //l'attribuer a l'utilisateur
+                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places+1; //+1 place dans la station
+                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures-1; //-1 voiture dans la station
                     if (debug==1) print1Station(stationindex);
                 }
 
-                else
+                else//si il n'y a pas de voitures disponibles on cherche une voiture disponible dans la station la plus proches
                 {
                     int cptstation;
                     int distancetampon;
@@ -175,7 +169,7 @@ int main()
                     distanceminimum=666;
                     indexminimum=666;
 
-                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
+                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture, recherche dichotomique
                     {
                         if(sauve.tabstation[cptstation].nbrevoitures!=0)
                         {
@@ -194,27 +188,27 @@ int main()
             else if (choixUtil=='b')
             {
                 printf("Bonjour, entrez le numero de la station\n");
-                scanf("%d",&stationindex);//demander la station
+                scanf("%d",&stationindex); //demander la station
                 sauve.tabutil[utilindex].station = stationindex;
-               if (debug==1) print1Station(stationindex);
-                if (sauve.tabstation[stationindex].places!=0) //verifier qu'il y a de la place
+                if (debug==1) print1Station(stationindex); //affichage pour les vérif et jeu d'essai
+                if (sauve.tabstation[stationindex].places!=0) //verifier qu'il y ait de la place
                 {
-                    sauve.tabutil[utilindex].voiture=0;
-                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places-1;
-                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+1;
+                    sauve.tabutil[utilindex].voiture=0; //le statut de l'utilisateur change
+                    sauve.tabstation[stationindex].places=sauve.tabstation[stationindex].places-1; //-1 place dans la station
+                    sauve.tabstation[stationindex].nbrevoitures=sauve.tabstation[stationindex].nbrevoitures+1; //+1 voiture dans la station
 
-                    printf("Combien de temps avez vous mis ?\n en minutes :");//demander le temps du trajet
-                    scanf("%d",&temps);//afficher le prix et le deduire du compte
+                    printf("Combien de temps avez vous mis ?\n en minutes :"); //demander le temps du trajet
+                    scanf("%d",&temps); //afficher le prix et le deduire du compte
                     if(temps<=30)
                     {
-                        temps=0;
+                        temps=0; // si le trajet est inférieur à 30mn il est gratuit
                     }
                     else
                     {
-                        temps=(temps-30);
+                        temps=(temps-30); // les trentes premières minutes sont gratuites
                         sauve.tabutil[utilindex].facture=sauve.tabutil[utilindex].facture+temps;
                     }
-                    sauve.tabutil[utilindex].nbretrajet=sauve.tabutil[utilindex].nbretrajet+1;
+                    sauve.tabutil[utilindex].nbretrajet=sauve.tabutil[utilindex].nbretrajet+1; //+1 trajet pour l'utilisateur
                     printf("Une facture de %d euros vous sera envoyee\n",temps);
                 }
                 else //sinon chercher la place la plus proche
@@ -227,7 +221,7 @@ int main()
                     distanceminimum=666;
                     indexminimum=666;
 
-                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une voiture
+                    for(cptstation=0; cptstation<5; cptstation++) //trouver la plus courte distance entre l'utilisateur et une place disponible
                     {
                         if(sauve.tabstation[cptstation].places!=0)
                         {
@@ -245,10 +239,10 @@ int main()
                 }
             }
 
-            else if (choixUtil=='c')
+            else if (choixUtil=='c')//afficher les informations de l'utilisateurs
+
             {
 
-                //afficher les informations de l'utilisateurs
                 int choix;
                 print1Util(utilindex);
                 printf("Voulez vous annuler votre abonnement ?\n \t1)Oui 2)Non\n");
@@ -278,7 +272,7 @@ int main()
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
             gestindex = gestvalide(nom_temp);
-            if(gestindex!=777)
+            if(gestindex!=777)//même démarche que pour l'utilisateur
             {
                 if(oldgestindex!=gestindex)
                 {
@@ -305,21 +299,18 @@ int main()
                 else
                 {
 
-
-                    //afficher les informations des utilisateurs
-                    //print1gest(utilgest);
                 }
             }
             if(debug==1) printf("  C'est toujours vous\n");
-            printUtil();//statistiques
+            printUtil(); //affichage des informations sur les stations et les utilisateurs
             printStation();
 
             printf("\n\t1) Ajouter ou supprimer des vehicules\n \t2) Supprimer un utilisateur\n");
 
             scanf("%d",&choixgest);
-            if (choixgest==1)  //consulter et modifier nbre vehicules
+            if (choixgest==1)  //consulter et modifier le nbre vehicules
             {
-                int compteur;//nbres de voitures a enlever ou ajouter
+                int compteur; //nbres de voitures à enlever ou ajouter
                 printf("Choisissez la station a modifier\n");
                 scanf("%d",&stationindex);
                 if ((stationindex==0)||(stationindex>TAILLE_TABS))
@@ -369,7 +360,7 @@ int main()
                 else
                 {
                     if(debug==1) printf("%s-%d\n",__FILE__,__LINE__);
-                    printUtil();//statistiques
+                    printUtil(); //statistiques
                     printStation();
                 }
 
@@ -378,7 +369,7 @@ int main()
             else
             {
                 if(debug==1) printf("%s-%d\n",__FILE__,__LINE__);
-                printUtil();//statistiques
+                printUtil(); //statistiques
                 printStation();
             }
 
