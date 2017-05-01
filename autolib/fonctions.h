@@ -45,6 +45,7 @@ typedef struct
 } t_sauve;
 
 extern t_sauve sauve;
+extern int debug;
 extern void init_utils_et_stations();
 extern void print1Util(int i);
 extern void printUtil();

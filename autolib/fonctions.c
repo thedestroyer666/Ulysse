@@ -36,7 +36,7 @@ void printUtil()
 
 void print1Station(int i)
 {
-    printf("\nsauve.tabstation[%d]\n", i);
+    printf("\nstation[%d]\n", i);
     printf("\t.places=%d\n",sauve.tabstation[i].places);
     printf("\t.nbrevoitures=%d\n",sauve.tabstation[i].nbrevoitures);
     printf("\t.station=%d\n",sauve.tabstation[i].station);
@@ -45,7 +45,7 @@ void print1Station(int i)
 void printStation()
 {
     int i;
-    printf("\n%s-%d printStation\n",__FILE__,__LINE__);
+    printf("\n%s-%d Station\n",__FILE__,__LINE__);
     for(i=0; i<TAILLE_TABS; i++)
     {
         print1Station(i);
@@ -55,7 +55,7 @@ void printStation()
 void printGest()
 {
     int i;
-    printf("\n%s-%d printGest\n",__FILE__,__LINE__);
+    printf("\n%s-%d Gest\n",__FILE__,__LINE__);
     printf("nombre de gestionnaire =%d",nbregest);
     for(i=0; i<nbregest; i++)
     {
@@ -68,34 +68,34 @@ void printGest()
 int utilisateur_deja_enregistre(char *nom_test)
 {
     int i;
-    printf("nom_test=%s",nom_test);
+    if(debug==1) printf("nom_test=%s",nom_test);
     for(i=0; i<sauve.nombre_utilisateurs_deja_enregistres; i++)
     {
-        printf("sauve.tabutil[%d].nom\t= %s\n", i, sauve.tabutil[i].nom);
+        if(debug==1) printf("tabutil[%d].nom\t= %s\n", i, sauve.tabutil[i].nom);
         if(strcmp(sauve.tabutil[i].nom,&nom_test[0])==0)
         {
-            printf("\n:) Trouve![%d]\n", i);
+            if(debug==1) printf("\n:) Trouve![%d]\n", i);
             return i;
         }
     }
-    printf("\n:( Pas trouve!\n");
+    if(debug==1) printf("\n:( Pas trouve!\n");
     return 777;
 
 }
 int gestvalide(char *nom_test)
 {
     int i;
-    printf("nom_test=%s",nom_test);
+    if(debug==1) printf("nom_test=%s",nom_test);
     for(i=0; i<nbregest; i++)
     {
-        printf("tabgest[%d].nom\t= %s\n", i, tabgest[i].nom);
+        if(debug==1) printf("tabgest[%d].nom\t= %s\n", i, tabgest[i].nom);
         if(strcmp(tabgest[i].nom,nom_test)==0)
         {
-            printf("\n:) Trouve![%d]\n", i);
+            if(debug==1) printf("\n:) Trouve![%d]\n", i);
             return i;
         }
     }
-    printf("\n:( Pas trouve!\n");
+    if(debug==1) printf("\n:( Pas trouve!\n");
     return 777;
 
 }
@@ -150,7 +150,6 @@ void init_utils_et_stations()
     strcpy(&tabgest[nbregest].nom[0],"ulysse");
     strcpy(&tabgest[nbregest].mdp[0],"gros");
     nbregest++;
-    printGest();
 }
 
 int abs(int distance)
@@ -173,7 +172,7 @@ void SaveState(t_sauve a_ecrire)
         // Write the structure to the file
         fwrite(&a_ecrire, sizeof(t_sauve), 1, fSaveFile);
         fclose(fSaveFile);
-        printf("*** Sauvegarde dans Savefile.bin \n");
+        if(debug==1) printf("*** Sauvegarde dans Savefile.bin \n");
     }
     else
     {
@@ -191,12 +190,10 @@ void RestoreState(t_sauve *a_initialiser)
         // read the structure from the file
         fread(a_initialiser, sizeof(t_sauve), 1, fLoadFile);
         fclose(fLoadFile);
-        printf("*** Relecture de la sauvegarde dans Savefile.bin \n");
+        if(debug==1) printf("*** Relecture de la sauvegarde dans Savefile.bin \n");
     }
     else
     {
         printf("Erreur ouverture Savefile.bin pour relecture de la sauvegarde!\nMais ca ne fait rien, on fera sans\n");
     }
 }
-
-
