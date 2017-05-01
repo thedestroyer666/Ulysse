@@ -13,7 +13,7 @@ t_sauve sauve;
 struct gestionnaire tabgest[TAILLE_TABS];
 int nbregest = 0;
 int temps;//temps du trajet
-int debug = 1; // imprime + ou - d'informations de debug
+int debug = 0; // imprime + ou - d'informations de debug
 
 int main()
 {
@@ -124,7 +124,7 @@ int main()
                 sauve.tabutil[sauve.nombre_utilisateurs_deja_enregistres].nbretrajet=0;
                 utilindex = sauve.nombre_utilisateurs_deja_enregistres;
                 sauve.nombre_utilisateurs_deja_enregistres++;
-                if (debug==1) print1Util(utilindex);
+                if (debug==1) printUtil();
             }
             oldutilindex=utilindex;
 
@@ -291,7 +291,7 @@ int main()
                         if(strcmp(tabgest[gestindex].mdp,mdp_temp)==0)
                         {
                             printf("  Bienvenue\n");
-                            if (debug==1) print1Util(gestindex);
+                            if (debug==1) printGest(gestindex);
                             ok=0;
                         }
                         else
