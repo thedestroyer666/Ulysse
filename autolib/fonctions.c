@@ -7,7 +7,7 @@ extern struct gestionnaire tabgest[];
 extern int nbregest;
 extern int NombresStation;
 
-void print1Util(int i)// fonction pour afficher les informations d'un utilisateur
+void print1Util(int i) // fonction pour afficher les informations d'un utilisateur
 {
     printf("\nsauve.tabutil[%d]\n", i);
     printf("\t.nom=%s\n",sauve.tabutil[i].nom);
@@ -20,7 +20,7 @@ void print1Util(int i)// fonction pour afficher les informations d'un utilisateu
     printf("\t.nbretrajet=%d\n",sauve.tabutil[i].nbretrajet);
 }
 
-void printUtil()// fonction pour afficher les informations de tout les utilisateurs
+void printUtil() // fonction pour afficher les informations de tout les utilisateurs
 {
     int i;
     printf("\n%s-%d printUtil\n",__FILE__,__LINE__);
@@ -34,7 +34,7 @@ void printUtil()// fonction pour afficher les informations de tout les utilisate
     }
 }
 
-void print1Station(int i)//fonction pour afficher les informations  d'une station
+void print1Station(int i) //fonction pour afficher les informations  d'une station
 {
     printf("\nstation[%d]\n", i);
     printf("\t.places=%d\n",sauve.tabstation[i].places);
@@ -42,7 +42,7 @@ void print1Station(int i)//fonction pour afficher les informations  d'une statio
     printf("\t.station=%d\n",sauve.tabstation[i].station);
 }
 
-void printStation()//fonction pour afficher les informations de toutes les stations
+void printStation() //fonction pour afficher les informations de toutes les stations
 {
     int i;
     printf("\n%s-%d Station\n",__FILE__,__LINE__);
@@ -52,7 +52,7 @@ void printStation()//fonction pour afficher les informations de toutes les stati
     }
 }
 
-void printGest()//fonction pour afficher les informations d'un gestionnaire
+void printGest() //fonction pour afficher les informations d'un gestionnaire
 {
     int i;
     printf("\n%s-%d Gest\n",__FILE__,__LINE__);
@@ -65,7 +65,7 @@ void printGest()//fonction pour afficher les informations d'un gestionnaire
     }
 }
 
-int utilisateur_deja_enregistre(char *nom_test)// vérification du mot de passe de l'utilisateur
+int utilisateur_deja_enregistre(char *nom_test) // vérification du mot de passe de l'utilisateur
 {
     int i;
     if(debug==1) printf("nom_test=%s",nom_test);
@@ -82,7 +82,7 @@ int utilisateur_deja_enregistre(char *nom_test)// vérification du mot de passe d
     return 777;
 
 }
-int gestvalide(char *nom_test)// vérification du mot de passe du gestionnaire
+int gestvalide(char *nom_test) // vérification du mot de passe du gestionnaire
 {
     int i;
     if(debug==1) printf("nom_test=%s",nom_test);
@@ -100,7 +100,7 @@ int gestvalide(char *nom_test)// vérification du mot de passe du gestionnaire
 
 }
 
-void init_utils_et_stations()// initialise les stations, les utilisateurs et les gestionnaires
+void init_utils_et_stations() // initialise les stations, les utilisateurs et les gestionnaires
 {
     sauve.tabstation[1].station=1;
     sauve.tabstation[1].places=17;
@@ -152,7 +152,7 @@ void init_utils_et_stations()// initialise les stations, les utilisateurs et les
     nbregest++;
 }
 
-int abs(int distance)//fonction valeur absolue pour calculer les différentes distances
+int abs(int distance) //fonction valeur absolue pour calculer les différentes distances
 {
     if(distance < 0) distance=-distance;
     return distance;
@@ -162,7 +162,7 @@ int abs(int distance)//fonction valeur absolue pour calculer les différentes dis
 
 // ask google : c language save and read data from file
 // https://www.gamedev.net/topic/633653-save-and-read-data-from-file/
-void SaveState(t_sauve a_ecrire)// fonction qui sauvent les structures dans un fichier
+void SaveState(t_sauve a_ecrire) // fonction qui sauvent les structures dans un fichier
 {
     // Open the file for writing binary
     FILE *fSaveFile = fopen("SaveFile.bin", "wb");
@@ -180,7 +180,7 @@ void SaveState(t_sauve a_ecrire)// fonction qui sauvent les structures dans un f
     }
 }
 
-void RestoreState(t_sauve *a_initialiser)// fonction qui lit les structures sauvées
+void RestoreState(t_sauve *a_initialiser) // fonction qui lit les structures sauvées
 {
     // Open the file for reading binary
     FILE *fLoadFile = fopen("SaveFile.bin", "rb");

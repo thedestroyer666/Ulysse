@@ -51,7 +51,7 @@ int main()
             }
 
         }
-        if (cpt==1)//Utilisateur
+        if (cpt==1) //Utilisateur
         {
 
             //menu utilisateur
@@ -60,13 +60,13 @@ int main()
             scanf("%s",&(nom_temp[0]));
             utilindex = utilisateur_deja_enregistre(nom_temp);
 
-            if(utilindex!=777)// on vérifie que l'utilisateur existe
+            if(utilindex!=777) // on vérifie que l'utilisateur existe
 
             {
-                if (sauve.tabutil[utilindex].abonnement==1)//on vérifie que l'utilisateur ait un abonnement
+                if (sauve.tabutil[utilindex].abonnement==1) //on vérifie que l'utilisateur ait un abonnement
                 {
 
-                    if(oldutilindex!=utilindex)//on regarde si c'est le même utilisateur qu'avant sinon on lui demande son mot de passe
+                    if(oldutilindex!=utilindex) //on regarde si c'est le même utilisateur qu'avant sinon on lui demande son mot de passe
                     {
                         ok=1;
                         do//boucle pour le not de passe
@@ -128,7 +128,7 @@ int main()
 
             scanf("%c",&junk); // purge le buffer de scanf
             printf("Que voulez vous faire ?\n ");
-            if (sauve.tabutil[utilindex].voiture==0)//on vérifie si l'utilisateur est déja dans une voiture ou pas pour définir les choix qu'il peut faire
+            if (sauve.tabutil[utilindex].voiture==0) //on vérifie si l'utilisateur est déja dans une voiture ou pas pour définir les choix qu'il peut faire
             {
                 printf("\ta) Louer un vehicule\n");
 
@@ -239,7 +239,7 @@ int main()
                 }
             }
 
-            else if (choixUtil=='c')//afficher les informations de l'utilisateurs
+            else if (choixUtil=='c') //afficher les informations de l'utilisateurs
 
             {
 
@@ -267,12 +267,12 @@ int main()
 
 
         }
-        else if (cpt==2)//si gestonnaire
+        else if (cpt==2) //si gestonnaire
         {
             printf("Quel est votre nom ?\n");
             scanf("%s",&(nom_temp[0]));
             gestindex = gestvalide(nom_temp);
-            if(gestindex!=777)//même démarche que pour l'utilisateur
+            if(gestindex!=777) //même démarche que pour l'utilisateur
             {
                 if(oldgestindex!=gestindex)
                 {
