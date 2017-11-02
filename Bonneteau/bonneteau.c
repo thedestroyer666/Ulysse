@@ -29,6 +29,7 @@ int main ()
     int gg;//le joueur a trouvé la bonne carte
     int tampon;
     int num1, num2;
+    int i; // quequefois ca sert
     srand(time(NULL)); //init des generateurs de nb aleatoires
 
     do //le joueur choisit un niveau avec vérif
@@ -39,34 +40,36 @@ int main ()
     while(n<1 || n>3);
     if(n==1) //definir le nbr de cartes et la cave en fonction du niveau de jeu
     {
-        nc=3;
-        cavej=150;
-        cavem=150;
+        nc=CARTES_NIV1;
+        cavej=CAVES_NIV1;
+        cavem=CAVES_NIV1;
     }
     else if(n==2)
     {
-        nc=4;
-        cavej=300;
-        cavem=300;
+        nc=CARTES_NIV2;
+        cavej=CAVES_NIV2;
+        cavem=CAVES_NIV2;
     }
     else
     {
-        nc=5;
-        cavej=500;
-        cavem=500;
+        nc=CARTES_NIV3;
+        cavej=CAVES_NIV3;
+        cavem=CAVES_NIV3;
     }
+    printf("niveau: %d, nombrecarte: %d, cavej: %d, cavem: %d\n",n,nc,cavej,CAVES_NIV1);
 
 //creer un tableau avec les cartes
-    char tableau[nc];
-    tableau[0]='D';
-    for (cpt=1; cpt<=nc-1; cpt++)
-    {
-        tableau[cpt]='R';
-    }
+    char tableau[CARTES_NIV3];
     //TRAITEMENT
-    do
+    do //tant que les caves sont supérieurs à 0 faire
     {
-//tant que les caves sont supérieurs à 0 faire
+        gg=0;
+        tableau[0]='D';
+        for (cpt=1; cpt<=nc-1; cpt++)
+        {
+            tableau[cpt]='R';
+        }
+
 //afficher le tableau
         printf("\n");
         for (cpt=0; cpt<nc; cpt++)
@@ -79,53 +82,65 @@ int main ()
             printf("\nchoisissez votre mise \n");
             scanf("%d", &m);
         }
-        while(m<=0);
+        while(m<=0||m>cavej);
 //retourner les cartes
         for (cpt=0; cpt<=nc-1; cpt++)
         {
-            printf("X ");
+            printf("[%d]X ",cpt);
         }
 //mélanger les cartes
         for(cpt=0; cpt<10; cpt++)
         {
             num1=rand()%nc;
             num2=rand()%nc;
-            tampon=num1;
+            tampon=tableau[num1];
             tableau[num1]=tableau[num2];
-            tableau[num2]=tableau[tampon];
+            tableau[num2]=tampon;
+/*afficher le tableau
+            printf("\n    cpt: %d",cpt);
+            for (i=0; i<nc; i++)
+            {
+                printf(" %c ",tableau[i]);
+            }*/
 
         }
 
 //demander & lire la carte choisie
         do
         {
-            printf("trouvez la dame! \n");
+            printf("\ntrouvez la dame! \n");
             scanf("%d", &cpt);
         }
         while(cpt<0);
+        printf("\n");
+        for (i=0; i<nc; i++)
+        {
+            printf(" [%d]%c ",i,tableau[i]);
+        }
+        printf("\nVous avez choisi %d\n", cpt);
 //si la carte choisie est celle que l'on doit trouver
         if(tableau[cpt]=='D')
         {
             gg=1;
-            printf("vous avez trouve\n");
+            printf("vous avez trouve la dame!\n");
         }
         if(gg==1)
-//alors la mise est doublé et on retire la mise au maitre du jeu
+//alors la mise est doublée et on retire la mise au maitre du jeu
         {
             cavej=cavej+(2*m);
-            cavem=cavem-m;
-            printf("la cave du joueur est %d, la cave du maitre du jeu est %d", cavej, cavem);
+            cavem=cavem-(2*m);
+            printf("la cave du joueur est %d, la cave du maitre du jeu est %d\n", cavej, cavem);
         }
 //sinon elle est perdue et la mise est ajouté à la cave du maitre du jeu
         else
         {
-            cavem=cavem+2*m;
+            cavem=cavem+m;
             cavej=cavej-m;
-            printf("la cave du joueur est %d, la cave du maitre du jeu est %d", cavej, cavem);
+            printf("la cave du joueur est %d, la cave du maitre du jeu est %d\n", cavej, cavem);
         }
 //afficher le montant des caves
     }
-    while(cavej>0 || cavem>0);
+    while(cavej>0 && cavem>0);
 
     //AFFICHAGE DES RESULTATS
     if(cavej>cavem)//designer le gagnant
@@ -137,6 +152,7 @@ int main ()
     {
         printf("Vous avez perdu, le maitre du jeu est FORT !\n");
     }
+    //while(1);
     return 0;
 
 }
