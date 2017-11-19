@@ -20,7 +20,7 @@ int main()
     int cpt; //compteur
     int dist2; //distance parcourue en un tour
     //variable pour la vérification des chiiffres
-    int num;
+    int num, num1;
     int verif;
     int reste;
     srand(time(NULL));
@@ -53,26 +53,33 @@ int main()
             scanf("%d", &dist2);
             verif=1;//on initialise la vérification
             num=dist2;
+            num1=dist2;
             do
             {
-                reste=num%10;
-                printf("0 %d\n",reste );
-                for(cpt=0; cpt<nbdes; cpt++)
+                while(num>10)
                 {
-                    printf("1 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
-                    if(tab[cpt]==reste)
+                    reste=num%10;
+                    num1 = num1-reste;
+                    printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
+                    num=num/10;
+                    printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
+                    for(cpt=0; cpt<nbdes; cpt++)
                     {
-                        printf("2 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
-                        break;
+                        printf("  1 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                        if(tab[cpt]==reste)
+                        {
+                            printf("    2 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                            break;
+                        }
                     }
-
+                    if (cpt==nbdes)
+                    {
+                        printf("mauvais nombre\n");
+                        //verif=0;
+                    }
+                    num1=9;
                 }
-                if (cpt==nbdes)
-                {
-                    printf("mauvais nombre\n");
-                    //verif=0;
-                }
-
+                verif = 1;
             }
             while (verif==0 && num>0);
 
