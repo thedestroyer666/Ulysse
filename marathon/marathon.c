@@ -29,7 +29,8 @@ int main()
 
 //TRAITEMENT
 
-    do {
+    do
+    {
         // tant que  distance >0 et que le nombre de tours est inferieur au nb de tours a faire
         printf("\n        distance= %d\n        tours restants=%d\n", dist, nbtours); // afficher la distance qu'il reste a parcourir et le nb de tours
         int tab[nbdes];
@@ -42,12 +43,14 @@ int main()
         }
 
 
-       do{// demander au joueur quel nombre il choisit ( 0 s il passe son tour) avec vérification
+        do // demander au joueur quel nombre il choisit ( 0 s il passe son tour) avec vérification
+        {
 
             printf("\nchoisissez votre nombre ou passez votre tour (0)\n");
-       scanf("%d", &dist2);
+            scanf("%d", &dist2);
 
-       } while (dist2<0 || dist2>dist);
+        }
+        while (dist2<0 || dist2>dist);
         dist=dist-dist2;// retrancher le nombre a la distance a parcourir
         nbtours=nbtours-1;// ajouter 1 au nombre de tours
         if(dist>=10000)
@@ -55,12 +58,14 @@ int main()
             nbdes=5;
         }
         else if(dist<10000)//si distance est < seuil (1000) alors retirer 1 au nb de dés diviser le seuil par 10
-            {
+        {
             nbdes=4;
-        }else if(dist<1000)
+        }
+        else if(dist<1000)
         {
             nbdes=3;
-        }else if (dist<100)
+        }
+        else if (dist<100)
         {
             nbdes=2;
         }
@@ -75,12 +80,12 @@ int main()
     }
     while (dist>0 && nbtours>0 );
     if(dist==0)
-        {
-            printf("vous avez gagne, vous courez tres vite\n");
-        }
-        else
-        {
-            printf("vous etes nul, perdez du gras\n");
-        }
- return 0;
+    {
+        printf("vous avez gagne, vous courez tres vite\n");
+    }
+    else
+    {
+        printf("vous etes nul, perdez du gras\n");
+    }
+    return 0;
 }
