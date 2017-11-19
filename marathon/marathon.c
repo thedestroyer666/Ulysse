@@ -17,9 +17,12 @@ int main()
     int dist; //initialiser la distance à parcourir
     int nbtours; // "" le nombres de tours
     int nbdes; // "" le nombre de dés
-    int seuil; // initialiser le seuil (10000)
     int cpt; //compteur
     int dist2; //distance parcourue en un tour
+    //variable pour la vérification des chiiffres
+    int num;
+    int verif;
+    int reste;
     srand(time(NULL));
     dist=DISTANCE;
     nbdes=NB_DES;
@@ -48,6 +51,30 @@ int main()
 
             printf("\nchoisissez votre nombre ou passez votre tour (0)\n");
             scanf("%d", &dist2);
+            verif=1;//on initialise la vérification
+            num=dist2;
+            do
+            {
+                reste=num%10;
+                printf("0 %d\n",reste );
+                for(cpt=0; cpt<nbdes; cpt++)
+                {
+                    printf("1 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                    if(tab[cpt]==reste)
+                    {
+                        printf("2 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                        break;
+                    }
+
+                }
+                if (cpt==nbdes)
+                {
+                    printf("mauvais nombre\n");
+                    //verif=0;
+                }
+
+            }
+            while (verif==0 && num>0);
 
         }
         while (dist2<0 || dist2>dist);
