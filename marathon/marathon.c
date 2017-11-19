@@ -20,7 +20,7 @@ int main()
     int cpt; //compteur
     int dist2; //distance parcourue en un tour
     //variable pour la vérification des chiiffres
-    int num, num1;
+    int num;
     int verif;
     int reste;
     srand(time(NULL));
@@ -53,48 +53,46 @@ int main()
             scanf("%d", &dist2);
             verif=1;//on initialise la vérification
             num=dist2;
-            num1=dist2;
             do
             {
                 while(num>10)
                 {
                     reste=num%10;
-                    num1 = num1-reste;
-                    printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
+                    //printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
                     num=num/10;
-                    printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
+                    //printf("num=%d dist2=%d num1=%d reste=%d\n",num, dist2, num1,reste );
                     for(cpt=0; cpt<nbdes; cpt++)
                     {
-                        printf("  1 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                        //printf("  1 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
                         if(tab[cpt]==reste)
                         {
-                            printf("    2 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
+                            //printf("    2 tab[%d](%d)==%d\n",cpt,tab[cpt],reste );
                             break;
                         }
                     }
                     if (cpt==nbdes)
                     {
-                        printf("mauvais nombre %d\n", num);
+                        printf("%d mauvais nombre %d car mauvais digit %d\n", __LINE__, num, reste);
                         verif=0;
                         num=0;
                     }
-                    printf("%d verif %d, num %d\n", __LINE__,verif, num);
+                    //printf("%d verif %d, num %d\n", __LINE__,verif, num);
                 }
-                printf("%d verif %d, num %d\n", __LINE__,verif, num);
+                //printf("%d verif %d, num %d\n", __LINE__,verif, num);
             }
             while (verif==0 && num>0);
-            printf("%d verif %d, num %d\n", __LINE__,verif, num);
-            printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
+            //printf("%d verif %d, num %d\n", __LINE__,verif, num);
+            //printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
         }
         while (dist2<0 || dist2>dist);
-        printf("%d verif %d, num %d\n", __LINE__,verif, num);
-        printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
+        //printf("%d verif %d, num %d\n", __LINE__,verif, num);
+        //printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
         if(verif==1)
         {
             dist=dist-dist2;// retrancher le nombre a la distance a parcourir
         }
-        printf("%d verif %d, num %d\n", __LINE__,verif, num);
-        printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
+        //printf("%d verif %d, num %d\n", __LINE__,verif, num);
+        //printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
         nbtours=nbtours-1;// ajouter 1 au nombre de tours
         if(dist>=10000)
         {
