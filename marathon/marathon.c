@@ -74,18 +74,27 @@ int main()
                     }
                     if (cpt==nbdes)
                     {
-                        printf("mauvais nombre\n");
-                        //verif=0;
+                        printf("mauvais nombre %d\n", num);
+                        verif=0;
+                        num=0;
                     }
-                    num1=9;
+                    printf("%d verif %d, num %d\n", __LINE__,verif, num);
                 }
-                verif = 1;
+                printf("%d verif %d, num %d\n", __LINE__,verif, num);
             }
             while (verif==0 && num>0);
-
+            printf("%d verif %d, num %d\n", __LINE__,verif, num);
+            printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
         }
         while (dist2<0 || dist2>dist);
-        dist=dist-dist2;// retrancher le nombre a la distance a parcourir
+        printf("%d verif %d, num %d\n", __LINE__,verif, num);
+        printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
+        if(verif==1)
+        {
+            dist=dist-dist2;// retrancher le nombre a la distance a parcourir
+        }
+        printf("%d verif %d, num %d\n", __LINE__,verif, num);
+        printf("%d dist2 %d, dist %d\n", __LINE__,dist2, dist);
         nbtours=nbtours-1;// ajouter 1 au nombre de tours
         if(dist>=10000)
         {
