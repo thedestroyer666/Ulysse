@@ -2,6 +2,7 @@
 OSSART Julie  14/12/17*/
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #define NB_LETTRES 40
 
@@ -74,8 +75,8 @@ int main()
         cpt2++;
     }
     int indAsc, indDesc; //indices de parcours ascendant et descendant
-    char tampon;
-    struct panier elt;
+    char tampon[NB_LETTRES+1];
+    //struct panier elt;
     //tant qu'il reste des éléments à trier faire
     for(indAsc=0; indAsc<cpt2-1; indAsc++)
     {
@@ -87,15 +88,15 @@ int main()
             //Permuter toute paire d'éléments consécutifs non ordonnés
             if (strcmp(tabPanier[indDesc].nomRayon,tabPanier[indDesc-1].nomRayon))
             {
-                strcpy(tampon,tabPanier[indDesc].nomRayon);
-                strcpy(tabPanier[indDesc].nomRayon,tabPanier[indDesc-1].nomRayon);
-                strcpy(tabPanier[indDesc-1].nomRayon,tampon);
+                strcpy((char *)tampon,(char *)tabPanier[indDesc].nomRayon);
+                strcpy((char *)tabPanier[indDesc].nomRayon,(char *)tabPanier[indDesc-1].nomRayon);
+                strcpy((char *)tabPanier[indDesc-1].nomRayon,(char *)tampon);
             }
         }
     }
 
     int indAsc2, indDesc2; //indices de parcours ascendant et descendant
-    char tampon2;
+    double tampon2;
     //struct panier elt;
     //tant qu'il reste des éléments à trier faire
     for(indAsc2=0; indAsc2<cpt2-1; indAsc2++)
@@ -106,11 +107,11 @@ int main()
         for(indDesc2=cpt2-1; indDesc2>=indAsc+1; indDesc2--)
         {
             //Permuter toute paire d'éléments consécutifs non ordonnés
-            if (strcmp(tabPanier[indDesc2].prixunitaire,tabPanier[indDesc2-1].prixunitaire))
+            if (tabPanier[indDesc2].prixunitaire<tabPanier[indDesc2-1].prixunitaire)
             {
-                strcpy(tampon2,tabPanier[indDesc2].prixunitaire);
-                strcpy(tabPanier[indDesc2].prixunitaire,tabPanier[indDesc2-1].prixunitaire);
-                strcpy(tabPanier[indDesc-1].prixunitaire,tampon2);
+                tampon2=tabPanier[indDesc2].prixunitaire;
+                tabPanier[indDesc2].prixunitaire=tabPanier[indDesc2-1].prixunitaire;
+                tabPanier[indDesc-1].prixunitaire=tampon2;
             }
         }
     }
