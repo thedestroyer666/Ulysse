@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1523040401 source:c:\kebra\z\epf\github\ulysse\centzer\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<time.h>
+	"SousProgrammes.h"
+
+1523040557 c:\kebra\z\epf\github\ulysse\centzer\sousprogrammes.h
+
+1523040513 source:c:\kebra\z\epf\github\ulysse\centzer\sousprogrammes.c
+	<windows.h>
+	"SousProgrammes.h"
+

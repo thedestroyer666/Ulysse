@@ -7,7 +7,7 @@
 
 int main()
 {
-    struct artiste *tabArtistes;
+    struct artiste tabArtistes[50];
     struct producteur *tabProducteurs;
     struct projet *tabProjets;
     int nbArtistes=0;
