@@ -14,7 +14,7 @@ struct artiste
 
 struct investissement
 {
-    double sommeproducteur; //somme versee par le producteur
+    float sommeproducteur; //somme versee par le producteur
     int numeroProjet;
 };
 struct producteur
@@ -32,8 +32,8 @@ struct projet
     char nomprojet[NB_LETTRES+1];
     char adressemail[NB_LETTRES+1]; //adresse mail de l'artiste
     char date[NB_LETTRES+1]; //date de publication du projet
-    double financement; //financement du projet
-    double sommeversee; //total des sommes déjà versées
+    float financement; //financement du projet
+    float sommeversee; //total des sommes déjà versées
     char listefinanciers; //liste des personnes finançant le projet
     char description[NB_LETTRES+1]; //texte descriptif du projet
     int etatavancement; //pourcentage indiquant l'avancement
@@ -41,5 +41,8 @@ struct projet
 };
 
 void COULEUR(int texte,int fond);
-
+void SAUVEGARDE ( struct artiste tabArtistes[50], int nbArtistes);
+void SAUVEGARDE1 ( struct producteur tabProducteur[50], int nbProducteurs);
+void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets);
 #endif // SOUSPROGRAMMES_H_INCLUDED
+
