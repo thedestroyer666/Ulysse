@@ -164,110 +164,110 @@ int main()
                     cpt++;
                 }
             }
-                else if(d==3)
+            else if(d==3)
+            {
+                //Afficher les projets du moins cher au plus cher
+                //Trier les projets: prix croissants
+                //Tant qu'il reste des éléments à trier faire
+                for(indAsc=0; indAsc<nbProjets-1; indAsc+1)
                 {
-                    //Afficher les projets du moins cher au plus cher
-                    //Trier les projets: prix croissants
-                    //Tant qu'il reste des éléments à trier faire
-                    for(indAsc=0; indAsc<nbProjets-1; indAsc+1)
+                    //Se placer sur la dernière case du tableau
+                    //Tant que l'on a pas atteint la partie du tableau qui n'a pas été triée(parcours de gauche à droite) faire
+                    for(indDesc=nbProjets-1; indDesc>=indAsc+1; indDesc--)
                     {
-                        //Se placer sur la dernière case du tableau
-                        //Tant que l'on a pas atteint la partie du tableau qui n'a pas été triée(parcours de gauche à droite) faire
-                        for(indDesc=nbProjets-1; indDesc>=indAsc+1; indDesc--)
+                        if(tabProjets[indDesc].financement<tabProjets[indDesc-1].financement)
                         {
-                            if(tabProjets[indDesc].financement<tabProjets[indDesc-1].financement)
-                            {
-                                tampon=tabProjets[indDesc];
-                                tabProjets[indDesc]=tabProjets[indDesc-1];
-                                tabProjets[indDesc-1]=tampon;
-                            }
+                            tampon=tabProjets[indDesc];
+                            tabProjets[indDesc]=tabProjets[indDesc-1];
+                            tabProjets[indDesc-1]=tampon;
                         }
                     }
-                    //Affichage
-                    cpt=0;
-                    while(cpt<nbProjets)  //Affichage du tableau des projets
-                    {
-                        printf("%s\n",tabProjets[cpt].nomprojet);
-                        printf("%s\n",tabProjets[cpt].adressemail);
-                        printf("%s\n",tabProjets[cpt].date);
-                        printf("%f\n",tabProjets[cpt].financement);
-                        printf("%f\n",tabProjets[cpt].sommeversee);
-                        printf("%s\n",tabProjets[cpt].listefinanciers);
-                        printf("%s\n",tabProjets[cpt].description);
-                        printf("%d\n",tabProjets[cpt].etatavancement);
-                        cpt++;
-                    }
                 }
-                    else if(d==4)
-                    {
-                        //Terminer le programme
-
-                    }
-                }
-            }
-            if(e==0) //options de l'artiste
-            {
-                while(h!=1)
+                //Affichage
+                cpt=0;
+                while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
-                    while(f!=0 && f!=1 && f!=2 && f!=3)
-                    {
-                        printf("\n\n Que voulez-vous faire ?\n  0:Proposer un projet\n   1:Consulter l'etat de mes projets\n");
-                        scanf("%d",&f);
-                    }
-                    if(f==0)//proposer un projet
-                    {
-                        //descritption
-                        //date
-                        //montant
-
-                    }
-                    else if(f==1)//voir l'état de ses projets
-                    {
-                        //liste contributeurs+leurs contributions
-                        //total
-
-                    }
-                    while(h!=1 && h!=0)
-                    {
-                        printf("\nVoulez vous poursuivre vos recherches ? 0:Oui 1:Non\n"); //continuer ou quitter
-                        scanf("%d",&h);
-                    }
-
-
+                    printf("%s\n",tabProjets[cpt].nomprojet);
+                    printf("%s\n",tabProjets[cpt].adressemail);
+                    printf("%s\n",tabProjets[cpt].date);
+                    printf("%f\n",tabProjets[cpt].financement);
+                    printf("%f\n",tabProjets[cpt].sommeversee);
+                    printf("%s\n",tabProjets[cpt].listefinanciers);
+                    printf("%s\n",tabProjets[cpt].description);
+                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    cpt++;
                 }
             }
-            else if(e==1) //options du producteur
+            else if(d==4)
             {
-                while(h!=1)
-                {
-                    while(g!=0 && g!=1 && g!=2 && g!=3)
-                    {
-                        printf("\n\n   Que voulez-vous faire ? \n0:Investir dans un projet \n1:Voir la liste des projets dans lesquels vous avez investis" );
-                        printf("   \n2:Voir la somme totale que vous avez investie\n");
-                        scanf("%d",&g);
-                    }
-                    if(g==0)//investir dans un projet
-                    {
-                        //choisir un projet
-                        //mettre une somme
-                    }
+                //Terminer le programme
 
-                    else if(g==1)//liste des projets dans lesquels ils ont investis
-                    {
-                        //afficher la liste des projets et les différents totaux
-
-                    }
-                    else if(g==2)//afficher la somme totale investie
-                    {
-
-                    }
-                    while(h!=1 && h!=0)
-                    {
-                        printf("\nVoulez vous poursuivre vos recherches ? 0:Oui 1:Non\n"); //continuer ou quitter
-                        scanf("%d",&h);
-                    }
-                }
             }
-
-            return 0;
         }
+    }
+    if(e==0) //options de l'artiste
+    {
+        while(h!=1)
+        {
+            while(f!=0 && f!=1 && f!=2 && f!=3)
+            {
+                printf("\n\n Que voulez-vous faire ?\n  0:Proposer un projet\n   1:Consulter l'etat de mes projets\n");
+                scanf("%d",&f);
+            }
+            if(f==0)//proposer un projet
+            {
+                //descritption
+                //date
+                //montant
+
+            }
+            else if(f==1)//voir l'état de ses projets
+            {
+                //liste contributeurs+leurs contributions
+                //total
+
+            }
+            while(h!=1 && h!=0)
+            {
+                printf("\nVoulez vous poursuivre vos recherches ? 0:Oui 1:Non\n"); //continuer ou quitter
+                scanf("%d",&h);
+            }
+
+
+        }
+    }
+    else if(e==1) //options du producteur
+    {
+        while(h!=1)
+        {
+            while(g!=0 && g!=1 && g!=2 && g!=3)
+            {
+                printf("\n\n   Que voulez-vous faire ? \n0:Investir dans un projet \n1:Voir la liste des projets dans lesquels vous avez investis" );
+                printf("   \n2:Voir la somme totale que vous avez investie\n");
+                scanf("%d",&g);
+            }
+            if(g==0)//investir dans un projet
+            {
+                //choisir un projet
+                //mettre une somme
+            }
+
+            else if(g==1)//liste des projets dans lesquels ils ont investis
+            {
+                //afficher la liste des projets et les différents totaux
+
+            }
+            else if(g==2)//afficher la somme totale investie
+            {
+
+            }
+            while(h!=1 && h!=0)
+            {
+                printf("\nVoulez vous poursuivre vos recherches ? 0:Oui 1:Non\n"); //continuer ou quitter
+                scanf("%d",&h);
+            }
+        }
+    }
+
+    return 0;
+}
