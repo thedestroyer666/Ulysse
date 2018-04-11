@@ -82,7 +82,7 @@ int main()
                 scanf("%s",&(tabArtistes[nbArtistes].adressemail));
                 printf("Choisissez un mot de passe.\n");
                 scanf("%s",&(tabArtistes[nbArtistes].mdp));
-                nbreProjets=0;//on initialise le nombre de projet à 0
+                tabArtistes[nbArtistes].nbreProjets=0;//on initialise le nombre de projet à 0
                 nbArtistes=nbArtistes+1;//on rajoute 1 au nombre d'artistes
                 SAUVEGARDE(tabArtistes,nbArtistes);//on sauvegarde le nouvel artiste
                 e=0;
