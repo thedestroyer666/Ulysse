@@ -106,11 +106,13 @@ void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde de
 {
     FILE*fichier;
     int cpt;
+    printf("%s-%d\n",__FILE__,__LINE__);
     fichier=fopen("fichierProjet.txt","w");
     cpt=0;
     fprintf(fichier,"%d\n",nbProjets);
     while(cpt<nbProjets)
     {
+        printf("%s-%d %d/%d\n",__FILE__,__LINE__,cpt, nbProjets);
         fprintf(fichier,"%d\n",tabProjets[cpt].numero);//on sauvegarde le numéro du projet
         fprintf(fichier,"%d\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
         fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
@@ -125,6 +127,7 @@ void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde de
 
     }
     fclose(fichier);
+    printf("%s-%d\n",__FILE__,__LINE__);
 }
 
 
