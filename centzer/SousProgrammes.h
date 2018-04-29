@@ -34,7 +34,7 @@ struct projet
     char date[NB_LETTRES+1]; //date de publication du projet
     float financement; //financement du projet
     float sommeversee; //total des sommes déjà versées
-    char listefinanciers; //liste des personnes finançant le projet
+    char listefinanciers[NB_LETTRES+1]; //liste des personnes finançant le projet
     char description[NB_LETTRES+1]; //texte descriptif du projet
     int etatavancement; //pourcentage indiquant l'avancement
 

@@ -316,7 +316,7 @@ int main()
                 scanf("%s",& (tabProjets[nbProjets].date));
                 printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
-                tabProjets[nbProjets].listefinanciers=0;
+                strcpy(tabProjets[nbProjets].listefinanciers,"");
                 printf("%s-%d %s-%s-%s\n",__FILE__,__LINE__,tabProjets[nbProjets].nomprojet,tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
@@ -340,11 +340,8 @@ int main()
                         //printf("%s-%d\n",__FILE__,__LINE__);
                         printf("%f\n",tabProjets[cpt].financement);
                         printf("%f\n",tabProjets[cpt].sommeversee);
-                        if(tabProjets[cpt].listefinanciers==0)
-                        {
-                            printf("%s\n",tabProjets[cpt].listefinanciers);
-                        }
-                         printf("%s\n",tabProjets[cpt].description);
+                        printf("%s\n",tabProjets[cpt].listefinanciers);
+                        printf("%s\n",tabProjets[cpt].description);
                         printf("%d\n",tabProjets[cpt].etatavancement);
                     }
                     else
