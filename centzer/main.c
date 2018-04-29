@@ -14,10 +14,11 @@ int main()
     int nbArtistes=0; //nombre d'artistes initialisé à 0
     int nbProducteurs=0; //nombre de producteurs initialisé à 0
     int nbProjets=0; //nombre de projets initialisé à 0
-    struct artiste artisteConnecte;
-    struct producteur producteurConnecte;
+    struct artiste artisteConnecte; //l'artiste qui est en ligne
+    struct producteur producteurConnecte; //le producteur qui est en ligne
 
     int a; //l'utilisateur a un compte ou pas
+    int z; //l'utlsateur a déjà un compte mas il est artiste ou utilisateur
     int b; //l'utilisateur veut s'inscrire ou non
     int c; //l'utilisateur est un artiste ou un producteur
     int d; //Les projets que le visiteur veux voir
@@ -28,11 +29,16 @@ int main()
     int indAsc, indDesc; //Indices de parcours ascendants et descendants pour le tri du tableau
     struct projet tampon;
     int cpt; //compteur
-
+    int trouve;// trouve t'on un compte et mot de passe correspondant
+    char emailTape[NB_LETTRES+1], mdpTape[NB_LETTRES+1];
+    CHARGEMENT ( tabArtistes, &nbArtistes);
+    CHARGEMENT1 ( tabProducteurs, &nbProducteurs);
+    CHARGEMENT2 ( tabProjets, &nbProjets);
     COULEUR(0,7);
     printf("\n                           BIENVENUE SUR SEEZER  \n ",7);
     printf("\n                       Le label de musique participatif :) \n");
     a=666;
+    z=666;
     b=666;
     c=666;
     d=666;
@@ -41,6 +47,7 @@ int main()
     g=666;
     h=666;
 
+
     while(a!=0 && a!=1)
     {
         printf("\n\n   Avez vous deja un compte ? 0: oui 1: non\n");
@@ -48,13 +55,85 @@ int main()
     }
     if(a==0) //si l'utilisateur  a déjà un compte
     {
-        /*printf("Quel est votre adresse mail ?\n"); //Demander son adresse mail et son mot de passe
-        scanf("%s",&);
-        printf("Entrez votre mot de passe\n.");
-        scanf("%s",&);
-        //afficher les informations du compte
-        //artiste
-        //ou producteur*/
+        while(z!=0 && z!=1)//artiste ou producteur ?
+        {
+            printf("\n\n   Etes vous deja artiste ou producteur ? 0: artiste 1: producteur\n");
+            scanf("%d",&z);
+        }
+        if(z==0)
+        {
+            printf("Quel est votre adresse mail ?\n"); //Demander son adresse mail et son mot de passe
+            scanf("%s",&emailTape);
+            printf("Entrez votre mot de passe\n");
+            scanf("%s",&mdpTape);
+
+
+            cpt=0;
+            trouve=0;
+            while (cpt<nbArtistes && trouve==0)
+            {
+                if (strcmp(emailTape,tabArtistes[cpt].adressemail)==0)
+                {
+                    trouve=1;
+                }
+                else
+                {
+                    cpt++;
+                }
+            }
+            if (trouve==1)
+            {
+                if (strcmp(mdpTape,tabArtistes[cpt].mdp)==0)
+                {
+                    trouve=2;
+                }
+            }
+            if(trouve==0)
+            {
+                printf("Adresse mail ou mot de passe errone\n");
+            }
+            if (trouve==2)
+            {
+                e=0;//on envoie l'utilisateur sur les choix de l'artiste
+            }
+        }
+        if (z==1) //ou producteur
+        {
+            printf("Quel est votre adresse mail ?\n"); //Demander son adresse mail et son mot de passe
+            scanf("%s",&emailTape);
+            printf("Entrez votre mot de passe\n.");
+            scanf("%s",&mdpTape);
+
+
+            cpt=0;
+            trouve=0;
+            while (cpt<nbProducteurs && trouve==0)
+            {
+                if (strcmp(emailTape,tabProducteurs[cpt].adressemail)==0)
+                {
+                    trouve=1;
+                }
+                else
+                {
+                    cpt++;
+                }
+            }
+            if (trouve==1)
+            {
+                if (strcmp(mdpTape,tabProducteurs[cpt].mdp)==0)
+                {
+                    trouve=2;
+                }
+            }
+            if(trouve==0)
+            {
+                printf("Adresse mail ou mot de passe errone\n");
+            }
+            if (trouve==2)
+            {
+                e=1;//on envoie l'utilisateur sur les choix du producteur
+            }
+        }
 
     }
     else if(a==1) //Si l'utilisateur n'a pas encore de compte
@@ -240,12 +319,14 @@ int main()
     {
         while(h!=1)
         {
-            while(g!=0 && g!=1 && g!=2 && g!=3)
+
+            do
             {
                 printf("\n\n   Que voulez-vous faire ? \n0:Investir dans un projet \n1:Voir la liste des projets dans lesquels vous avez investis" );
                 printf("   \n2:Voir la somme totale que vous avez investie\n");
                 scanf("%d",&g);
             }
+            while(g<0 || g>3);
             if(g==0)//investir dans un projet
             {
                 //choisir un projet

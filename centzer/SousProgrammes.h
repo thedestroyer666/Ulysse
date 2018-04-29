@@ -41,8 +41,13 @@ struct projet
 };
 
 void COULEUR(int texte,int fond);
-void SAUVEGARDE ( struct artiste tabArtistes[50], int nbArtistes);
-void SAUVEGARDE1 ( struct producteur tabProducteur[50], int nbProducteurs);
-void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets);
-#endif // SOUSPROGRAMMES_H_INCLUDED
 
+void SAUVEGARDE ( struct artiste tabArtistes[50], int nbArtistes);
+void CHARGEMENT ( struct artiste tabArtistes[50], int *nbArtistes);
+
+void SAUVEGARDE1 ( struct producteur tabProducteurs[50], int nbProducteurs);
+void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs);
+
+void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets);
+void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets);
+#endif // SOUSPROGRAMMES_H_INCLUDED
