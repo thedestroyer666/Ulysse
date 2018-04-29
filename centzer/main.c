@@ -14,8 +14,6 @@ int main()
     int nbArtistes=0; //nombre d'artistes initialisé à 0
     int nbProducteurs=0; //nombre de producteurs initialisé à 0
     int nbProjets=0; //nombre de projets initialisé à 0
-    struct artiste artisteConnecte; //l'artiste qui est en ligne
-    struct producteur producteurConnecte; //le producteur qui est en ligne
 
     int a; //l'utilisateur a un compte ou pas
     int z; //l'utlsateur a déjà un compte mas il est artiste ou utilisateur
@@ -29,6 +27,8 @@ int main()
     int indAsc, indDesc; //Indices de parcours ascendants et descendants pour le tri du tableau
     struct projet tampon;
     int cpt; //compteur
+    int artisteco;//index artiste connecté
+    int producteurco;//index producteur connecté
     int trouve;// trouve t'on un compte et mot de passe correspondant
     char emailTape[NB_LETTRES+1], mdpTape[NB_LETTRES+1];
     CHARGEMENT ( tabArtistes, &nbArtistes);
@@ -75,11 +75,13 @@ int main()
                 if (strcmp(emailTape,tabArtistes[cpt].adressemail)==0)
                 {
                     trouve=1;
+                    artisteco=cpt;
                 }
                 else
                 {
                     cpt++;
                 }
+
             }
             if (trouve==1)
             {
@@ -112,6 +114,7 @@ int main()
                 if (strcmp(emailTape,tabProducteurs[cpt].adressemail)==0)
                 {
                     trouve=1;
+                    producteurco=cpt;
                 }
                 else
                 {
@@ -163,6 +166,7 @@ int main()
                 scanf("%s",&(tabArtistes[nbArtistes].mdp));
                 tabArtistes[nbArtistes].nbreProjets=0;//on initialise le nombre de projet à 0
                 nbArtistes=nbArtistes+1;//on rajoute 1 au nombre d'artistes
+                artisteco=nbArtistes;
                 SAUVEGARDE(tabArtistes,nbArtistes);//on sauvegarde le nouvel artiste
                 e=0;
             }
@@ -178,6 +182,7 @@ int main()
                 scanf("%s",(&tabProducteurs[nbProducteurs].mdp));
                 nbProducteurs=nbProducteurs+1;//on rajoute 1 au nombre de producteurs
                 SAUVEGARDE1(tabProducteurs,nbProducteurs);//on sauvegarde le nouveau producteur
+                producteurco=nbProducteurs;
                 e=1;
             }
         }
@@ -185,7 +190,7 @@ int main()
         {
             while(d!=1 && d!=2 && d!=3 && d!=4)
             {
-                printf("\nBienvenue sur la plateforme de recherche de projet.\n  Quels projets voulez vous voir?\n 1:Les 5 derniers projets \n 2:Les projets les plus chers\n 3:Les projets les moins chers\n 4:Quitter\n");
+                printf("\nBienvenue sur la plateforme de recherche de projet.\n  Quels projets voulez vous voir?\n 1:Les projets du plus récents au plus vieux \n 2:Les projets les plus chers\n 3:Les projets les moins chers\n 4:Quitter\n");
                 scanf("%d",&d);
             }
             if(d==1)//Afficher les 5 derniers projets
@@ -279,7 +284,8 @@ int main()
             }
             else if(d==4)
             {
-                //Terminer le programme
+                printf("\n Merci de votre visite !\n");
+                return 0;//Terminer le programme
 
             }
         }
@@ -295,15 +301,35 @@ int main()
             }
             if(f==0)//proposer un projet
             {
-                //descritption
-                //date
-                //montant
+                nbProjets++;
+                strcpy(tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
+                printf("\n Rentrez le nom de votre projet \n");
+                scanf("%s",& (tabProjets[nbProjets].nomprojet));
+                printf("\n Rentrez la descritpton de votre projet \n");//descritption
+                scanf("%s",& (tabProjets[nbProjets].description));
+                printf("\n Rentrez une date \n");//date
+                scanf("%s",& (tabProjets[nbProjets].date));
+                printf("\n Rentrez un montnant \n");//montant
+                scanf("%f",& (tabProjets[nbProjets].financement));
+                SAUVEGARDE2(tabProjets,nbProjets);
 
             }
             else if(f==1)//voir l'état de ses projets
             {
-                //liste contributeurs+leurs contributions
-                //total
+                cpt=0;
+                while(cpt<nbProjets)  //Affichage du tableau des projets
+                {//liste contributeurs+leurs contributions
+                    printf("%s\n",tabProjets[cpt].nomprojet);//total
+                    printf("%s\n",tabProjets[cpt].adressemail);
+                    printf("%s\n",tabProjets[cpt].date);
+                    printf("%f\n",tabProjets[cpt].financement);
+                    printf("%f\n",tabProjets[cpt].sommeversee);
+                    printf("%s\n",tabProjets[cpt].listefinanciers);
+                    printf("%s\n",tabProjets[cpt].description);
+                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    cpt++;
+                }
+
 
             }
             while(h!=1 && h!=0)
