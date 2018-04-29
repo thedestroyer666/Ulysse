@@ -33,8 +33,8 @@ int main()
     char emailTape[NB_LETTRES+1], mdpTape[NB_LETTRES+1];
     CHARGEMENT ( tabArtistes, &nbArtistes);
     CHARGEMENT1 ( tabProducteurs, &nbProducteurs);
-     printf("nbProjets=%d\n",nbProjets);
-   CHARGEMENT2 ( tabProjets, &nbProjets);
+    printf("nbProjets=%d\n",nbProjets);
+    CHARGEMENT2 ( tabProjets, &nbProjets);
     printf("nbProjets=%d\n",nbProjets);
     COULEUR(0,7);
     printf("\n                           BIENVENUE SUR SEEZER  \n ",7);
@@ -312,6 +312,7 @@ int main()
                 scanf("%s",& (tabProjets[nbProjets].date));
                 printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
+                tabProjets[nbProjets].listefinanciers=0;
                 nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
                 printf("nbProjets=%d\n",nbProjets);
@@ -321,18 +322,29 @@ int main()
                 cpt=0;
                 printf("nbProjets=%d\n",nbProjets);
                 while(cpt<nbProjets)  //Affichage du tableau des projets
-                {//liste contributeurs+leurs contributions
+                {
+                    //liste contributeurs+leurs contributions
+                    printf("cpt=%d\n",cpt);
                     printf("%s\n",tabProjets[cpt].nomprojet);//total
                     printf("%s\n",tabProjets[cpt].adressemail);
                     printf("%s\n",tabProjets[cpt].date);
+                    printf("%d\n",__LINE__);
                     printf("%f\n",tabProjets[cpt].financement);
+                    printf("%d\n",__LINE__);
                     printf("%f\n",tabProjets[cpt].sommeversee);
-                    printf("%s\n",tabProjets[cpt].listefinanciers);
+                    printf("%d\n",__LINE__);
+                    if(tabProjets[cpt].listefinanciers==0)
+                    {
+                        printf("%s\n",tabProjets[cpt].listefinanciers);
+                    }
+                    printf("%d\n",__LINE__);
                     printf("%s\n",tabProjets[cpt].description);
                     printf("%d\n",tabProjets[cpt].etatavancement);
                     cpt++;
-                }
+                    printf("%d\n",__LINE__);
 
+                }
+                printf("%d\n",__LINE__);
 
             }
             while(h!=1 && h!=0)
