@@ -325,21 +325,29 @@ int main()
                 {
                     //liste contributeurs+leurs contributions
                     printf("cpt=%d\n",cpt);
-                    printf("%s\n",tabProjets[cpt].nomprojet);//total
-                    printf("%s\n",tabProjets[cpt].adressemail);
-                    printf("%s\n",tabProjets[cpt].date);
-                    printf("%d\n",__LINE__);
-                    printf("%f\n",tabProjets[cpt].financement);
-                    printf("%d\n",__LINE__);
-                    printf("%f\n",tabProjets[cpt].sommeversee);
-                    printf("%d\n",__LINE__);
-                    if(tabProjets[cpt].listefinanciers==0)
+                    printf("%d %s vs %s\n",__LINE__,tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail);
+                    if(strcmp(tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail)==0)
                     {
-                        printf("%s\n",tabProjets[cpt].listefinanciers);
+                        printf("%s\n",tabProjets[cpt].nomprojet);//total
+                        printf("%s\n",tabProjets[cpt].adressemail);
+                        printf("%s\n",tabProjets[cpt].date);
+                        printf("%d\n",__LINE__);
+                        printf("%f\n",tabProjets[cpt].financement);
+                        printf("%d\n",__LINE__);
+                        printf("%f\n",tabProjets[cpt].sommeversee);
+                        printf("%d\n",__LINE__);
+                        if(tabProjets[cpt].listefinanciers==0)
+                        {
+                            printf("%s\n",tabProjets[cpt].listefinanciers);
+                        }
+                        printf("%d\n",__LINE__);
+                        printf("%s\n",tabProjets[cpt].description);
+                        printf("%d\n",tabProjets[cpt].etatavancement);
                     }
-                    printf("%d\n",__LINE__);
-                    printf("%s\n",tabProjets[cpt].description);
-                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    else
+                    {
+                        printf("%d mail correspond pas\n",__LINE__);
+                    }
                     cpt++;
                     printf("%d\n",__LINE__);
 
