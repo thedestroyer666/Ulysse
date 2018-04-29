@@ -33,7 +33,9 @@ int main()
     char emailTape[NB_LETTRES+1], mdpTape[NB_LETTRES+1];
     CHARGEMENT ( tabArtistes, &nbArtistes);
     CHARGEMENT1 ( tabProducteurs, &nbProducteurs);
-    CHARGEMENT2 ( tabProjets, &nbProjets);
+     printf("nbProjets=%d\n",nbProjets);
+   CHARGEMENT2 ( tabProjets, &nbProjets);
+    printf("nbProjets=%d\n",nbProjets);
     COULEUR(0,7);
     printf("\n                           BIENVENUE SUR SEEZER  \n ",7);
     printf("\n                       Le label de musique participatif :) \n");
@@ -301,7 +303,6 @@ int main()
             }
             if(f==0)//proposer un projet
             {
-                nbProjets++;
                 strcpy(tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 printf("\n Rentrez le nom de votre projet \n");
                 scanf("%s",& (tabProjets[nbProjets].nomprojet));
@@ -309,14 +310,16 @@ int main()
                 scanf("%s",& (tabProjets[nbProjets].description));
                 printf("\n Rentrez une date \n");//date
                 scanf("%s",& (tabProjets[nbProjets].date));
-                printf("\n Rentrez un montnant \n");//montant
+                printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
+                nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
-
+                printf("nbProjets=%d\n",nbProjets);
             }
             else if(f==1)//voir l'état de ses projets
             {
                 cpt=0;
+                printf("nbProjets=%d\n",nbProjets);
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {//liste contributeurs+leurs contributions
                     printf("%s\n",tabProjets[cpt].nomprojet);//total

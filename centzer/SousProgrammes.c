@@ -58,7 +58,7 @@ void SAUVEGARDE1 ( struct producteur tabProducteurs[50], int nbProducteurs) //Sa
 {
     FILE*fichier;
     int cpt,j;
-   fichier=fopen("fichierProducteur.txt","w");
+    fichier=fopen("fichierProducteur.txt","w");
     cpt=0;
     while(cpt<nbProducteurs)
     {
@@ -102,52 +102,54 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs) //c
 }
 
 
-    void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde des projets
+void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde des projets
+{
+    FILE*fichier;
+    int cpt;
+    fichier=fopen("fichierProjet.txt","w");
+    cpt=0;
+    fprintf(fichier,"%d\n",nbProjets);
+    while(cpt<nbProjets)
     {
-        FILE*fichier;
-        int cpt;
-        fichier=fopen("fichierProjet.txt","w");
-        cpt=0;
-        while(cpt<nbProjets)
-        {
-            fprintf(fichier,"%d\n",tabProjets[cpt].numero);//on sauvegarde le numéro du projet
-            fprintf(fichier,"%d\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
-            fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
-            fprintf(fichier,"%s\n",tabProjets[cpt].date);//on sauvegarde la date de publication du projet
-            fprintf(fichier,"%d\n",tabProjets[cpt].etatavancement);//on sauvegarde l'état d'avancement(pourcentage)
-            fprintf(fichier,"%s\n",tabProjets[cpt].description);//on sauvegarde la description du projet
-            fprintf(fichier,"%s\n",tabProjets[cpt].listefinanciers);//on sauvegarde la liste des personnes qui financent le projet
-            fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
-            fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
-            cpt++;
+        fprintf(fichier,"%d\n",tabProjets[cpt].numero);//on sauvegarde le numéro du projet
+        fprintf(fichier,"%d\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
+        fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
+        fprintf(fichier,"%s\n",tabProjets[cpt].date);//on sauvegarde la date de publication du projet
+        fprintf(fichier,"%d\n",tabProjets[cpt].etatavancement);//on sauvegarde l'état d'avancement(pourcentage)
+        fprintf(fichier,"%s\n",tabProjets[cpt].description);//on sauvegarde la description du projet
+        fprintf(fichier,"%s\n",tabProjets[cpt].listefinanciers);//on sauvegarde la liste des personnes qui financent le projet
+        fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
+        fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
+        cpt++;
 
 
-        }
-        fclose(fichier);
     }
+    fclose(fichier);
+}
 
 
-    void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
+void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
+{
+    FILE*fichier;
+    int cpt;
+    fichier=fopen("fichierProjet.txt","r");
+    fscanf(fichier,"%d",&*nbProjets);//on lit nbProjets
+    cpt=0;
+    while(cpt<*nbProjets)
     {
-        FILE*fichier;
-        int cpt;
-        fichier=fopen("fichierProjet.txt","r");
-        cpt=0;
-        while(cpt<*nbProjets)
-        {
-            fscanf(fichier,"%d",& (tabProjets[cpt].numero));//on charge le numéro du projet
-            fscanf(fichier,"%d",& (tabProjets[cpt].nomprojet));//on charge le nom du projet
-            fscanf(fichier,"%s",& (tabProjets[cpt].adressemail));//on charge l'adresse mail de l'artiste qui créé le projet
-            fscanf(fichier,"%s",& (tabProjets[cpt].date));//on charge la date de publication du projet
-            fscanf(fichier,"%d",& (tabProjets[cpt].etatavancement));//on charge l'état d'avancement(pourcentage)
-            fscanf(fichier,"%s",& (tabProjets[cpt].description));//on charge la description du projet
-            fscanf(fichier,"%s",& (tabProjets[cpt].listefinanciers));//on charge la liste des personnes qui financent le projet
-            fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
-            fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
-            cpt++;
+        fscanf(fichier,"%d",& (tabProjets[cpt].numero));//on charge le numéro du projet
+        fscanf(fichier,"%d",& (tabProjets[cpt].nomprojet));//on charge le nom du projet
+        fscanf(fichier,"%s",& (tabProjets[cpt].adressemail));//on charge l'adresse mail de l'artiste qui créé le projet
+        fscanf(fichier,"%s",& (tabProjets[cpt].date));//on charge la date de publication du projet
+        fscanf(fichier,"%d",& (tabProjets[cpt].etatavancement));//on charge l'état d'avancement(pourcentage)
+        fscanf(fichier,"%s",& (tabProjets[cpt].description));//on charge la description du projet
+        fscanf(fichier,"%s",& (tabProjets[cpt].listefinanciers));//on charge la liste des personnes qui financent le projet
+        fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
+        fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
+        cpt++;
 
 
-        }
-        fclose(fichier);
     }
+    fclose(fichier);
+}
 
