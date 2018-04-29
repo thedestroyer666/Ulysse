@@ -301,7 +301,7 @@ int main()
             while(f!=0 && f!=1 && f!=2 && f!=3)
             {
                 printf("%d h=%d f=%d e=%d\n",__LINE__,h,f,e);
-                printf("\n\n Que voulez-vous faire ?\n  0:Proposer un projet\n   1:Consulter l'etat de mes projets\n");
+                printf("\n\n Que voulez-vous faire ?\n   0:Proposer un projet\n   1:Consulter l'etat de mes projets\n");
                 scanf("%d",&f);
             }
             if(f==0)//proposer un projet
@@ -310,15 +310,14 @@ int main()
                 strcpy(tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 printf("\n Rentrez le nom de votre projet \n");
                 scanf("%s",& (tabProjets[nbProjets].nomprojet));
-                printf("\n Rentrez la descritpton de votre projet \n");//descritption
+                printf("\n Rentrez la description de votre projet \n");//descritption
                 scanf("%s",& (tabProjets[nbProjets].description));
                 printf("\n Rentrez une date \n");//date
                 scanf("%s",& (tabProjets[nbProjets].date));
                 printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
-                printf("%s-%d\n",__FILE__,__LINE__);
                 tabProjets[nbProjets].listefinanciers=0;
-                printf("%s-%d\n",__FILE__,__LINE__);
+                printf("%s-%d %s-%s-%s\n",__FILE__,__LINE__,tabProjets[nbProjets].nomprojet,tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
                 printf("nbProjets=%d\n",nbProjets);
@@ -338,17 +337,14 @@ int main()
                         printf("%s\n",tabProjets[cpt].nomprojet);//total
                         printf("%s\n",tabProjets[cpt].adressemail);
                         printf("%s\n",tabProjets[cpt].date);
-                        printf("%s-%d\n",__FILE__,__LINE__);
+                        //printf("%s-%d\n",__FILE__,__LINE__);
                         printf("%f\n",tabProjets[cpt].financement);
-                        printf("%s-%d\n",__FILE__,__LINE__);
                         printf("%f\n",tabProjets[cpt].sommeversee);
-                        printf("%s-%d\n",__FILE__,__LINE__);
                         if(tabProjets[cpt].listefinanciers==0)
                         {
                             printf("%s\n",tabProjets[cpt].listefinanciers);
                         }
-                        printf("%s-%d\n",__FILE__,__LINE__);
-                        printf("%s\n",tabProjets[cpt].description);
+                         printf("%s\n",tabProjets[cpt].description);
                         printf("%d\n",tabProjets[cpt].etatavancement);
                     }
                     else
@@ -356,10 +352,10 @@ int main()
                         printf("%d mail correspond pas\n",__LINE__);
                     }
                     cpt++;
-                    printf("%s-%d\n",__FILE__,__LINE__);
+                    //printf("%s-%d\n",__FILE__,__LINE__);
 
                 }
-                printf("%s-%d\n",__FILE__,__LINE__);
+                //printf("%s-%d\n",__FILE__,__LINE__);
 
             }
             printf("%d h=%d f=%d e=%d\n",__LINE__,h,f,e);
