@@ -353,16 +353,19 @@ int main()
 
             do
             {
-                printf("\n\n   Que voulez-vous faire ? \n0:Investir dans un projet \n1:Voir la liste des projets dans lesquels vous avez investis" );
-                printf("   \n2:Voir la somme totale que vous avez investie\n");
+                printf("\n\n   Que voulez-vous faire ? \n   0:Investir dans un projet \n   1:Voir la liste des projets dans lesquels vous avez investis" );
+                printf("   \n   2:Voir la somme totale que vous avez investie\n");
                 scanf("%d",& g);
             }
             while(g<0 || g>1);
+            printf("%s-%d %d\n",__FILE__,__LINE__,g);
             if(g==0)//investir dans un projet
             {
+                printf("%s-%d\n",__FILE__,__LINE__);
                 g=666;
                 cpt=0;
                 float s;//somme versée
+                printf("%s-%d %d/%d\n",__FILE__,__LINE__,cpt,nbProjets);
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
                     printf("%d",cpt);
@@ -376,6 +379,7 @@ int main()
                     printf("%d\n",tabProjets[cpt].etatavancement);
                     cpt++;
                 }
+                printf("%s-%d\n",__FILE__,__LINE__);
                 while(cpt<0 || cpt>nbProjets)
                 {
                     printf("\nTapez le numéro du projet dans lequel vous voulez investir\n");//choisir un projet
