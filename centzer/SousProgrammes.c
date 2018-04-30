@@ -19,7 +19,6 @@ void SAUVEGARDE ( struct artiste tabArtistes[50], int nbArtistes) //Sauvegarde d
 {
     FILE*fichier;//on créé un fichier
     int cpt;
-    printf("%s-%d Sauve Artistes\n",__FILE__,__LINE__);
     fichier=fopen("fichierArtiste.txt","w");//on ouvre un fichier texte dans lequel on écrit les informations de l'artiste
     cpt=0;
     fprintf(fichier,"%d\n",nbArtistes);
@@ -29,8 +28,9 @@ void SAUVEGARDE ( struct artiste tabArtistes[50], int nbArtistes) //Sauvegarde d
         fprintf(fichier,"%s\n",tabArtistes[cpt].adressemail);//on charge  l'adresse mail de l'artiste
         fprintf(fichier,"%s\n",tabArtistes[cpt].mdp);//on charge  le mot de passe de l'artiste
         fprintf(fichier,"%d\n",tabArtistes[cpt].nbreProjets);//on charge  le nombre de projets de l'artiste
-        printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabArtistes[cpt].adressemail);
         cpt++;
+
+
     }
     fclose(fichier);//on ferme le fichier
 }
@@ -39,7 +39,6 @@ void CHARGEMENT ( struct artiste tabArtistes[50], int *nbArtistes) //chargement 
 {
     FILE*fichier;//on créé un fichier
     int cpt;
-    printf("%s-%d Charge Artistes\n",__FILE__,__LINE__);
     fichier=fopen("fichierArtiste.txt","r");//on ouvre un fichier texte dans lequel on écrit les informations de l'artiste
     cpt=0;
     fscanf(fichier,"%d",&*nbArtistes);//on lit nbartistes
@@ -49,7 +48,6 @@ void CHARGEMENT ( struct artiste tabArtistes[50], int *nbArtistes) //chargement 
         fscanf(fichier,"%s",& (tabArtistes[cpt].adressemail));//on sauvegarde  l'adresse mail de l'artiste
         fscanf(fichier,"%s",& (tabArtistes[cpt].mdp));//on sauvegarde  le mot de passe de l'artiste
         fscanf(fichier,"%d",& (tabArtistes[cpt].nbreProjets));//on sauvegarde  le nombre de projets de l'artiste
-        printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabArtistes[cpt].adressemail);
         cpt++;
     }
     fclose(fichier);//on ferme le fichier
@@ -60,8 +58,7 @@ void SAUVEGARDE1 ( struct producteur tabProducteurs[50], int nbProducteurs) //Sa
 {
     FILE*fichier;
     int cpt,j;
-    printf("%s-%d Sauve Producteurs\n",__FILE__,__LINE__);
-    fichier=fopen("fichierProducteur.txt","w");
+   fichier=fopen("fichierProducteur.txt","w");
     cpt=0;
     while(cpt<nbProducteurs)
     {
@@ -74,7 +71,6 @@ void SAUVEGARDE1 ( struct producteur tabProducteurs[50], int nbProducteurs) //Sa
             fprintf(fichier,"%f\n",tabProducteurs[cpt].tabInvest[j].sommeproducteur);
             fprintf(fichier,"%d\n",tabProducteurs[cpt].tabInvest[j].numeroProjet);
         }
-        printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabProducteurs[cpt].adressemail);
         cpt++;
 
 
@@ -86,7 +82,6 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs) //c
 {
     FILE*fichier;//on créé un fichier
     int cpt,j;
-    printf("%s-%d Charge Producteurs\n",__FILE__,__LINE__);
     fichier=fopen("fichierArtiste.txt","r");//on ouvre un fichier texte dans lequel on écrit les informations du producteur
     cpt=0;
     fscanf(fichier,"%d",&*nbProducteurs);// on ajoute le nomre de producteurs
@@ -96,7 +91,6 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs) //c
         fscanf(fichier,"%s",& (tabProducteurs[cpt].adressemail));//on charge  l'adresse mail du producteur
         fscanf(fichier,"%s",& (tabProducteurs[cpt].mdp));//on charge  le mot de passe du producteurs
         fscanf(fichier,"%d",& (tabProducteurs[cpt].nbreArgent));//
-        printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabProducteurs[cpt].adressemail);
         cpt++;
         for (j=0; j<tabProducteurs[cpt].nbreArgent; j++)
         {
@@ -108,59 +102,50 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs) //c
 }
 
 
-void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde des projets
-{
-    FILE*fichier;
-    int cpt;
-    printf("%s-%d Sauve Projets\n",__FILE__,__LINE__);
-    fichier=fopen("fichierProjet.txt","w");
-    cpt=0;
-    fprintf(fichier,"%d\n",nbProjets);
-    while(cpt<nbProjets)
+    void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde des projets
     {
-        printf("%s-%d %d/%d\n",__FILE__,__LINE__,cpt,nbProjets);
-        fprintf(fichier,"%d\n",tabProjets[cpt].numero);//on sauvegarde le numéro du projet
-        fprintf(fichier,"%s\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
-        fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
-        fprintf(fichier,"%s\n",tabProjets[cpt].date);//on sauvegarde la date de publication du projet
-        fprintf(fichier,"%d\n",tabProjets[cpt].etatavancement);//on sauvegarde l'état d'avancement(pourcentage)
-        fprintf(fichier,"%s\n",tabProjets[cpt].description);//on sauvegarde la description du projet
-        printf("%s-%d Sauve Projets\n",__FILE__,__LINE__);
-        fprintf(fichier,"%s\n",tabProjets[cpt].listefinanciers);//on sauvegarde la liste des personnes qui financent le projet
-        printf("%s-%d Sauve Projets\n",__FILE__,__LINE__);
-        fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
-        fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
-        printf("%s-%d      %d %s-%s.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail);
-        cpt++;
-    }
-    printf("%s-%d Sauve Projets\n",__FILE__,__LINE__);
-    fclose(fichier);
-    printf("%s-%d Sauve Projets\n",__FILE__,__LINE__);
-}
+        FILE*fichier;
+        int cpt;
+        fichier=fopen("fichierProjet.txt","w");
+        cpt=0;
+        while(cpt<nbProjets)
+        {
+            fprintf(fichier,"%d\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
+            fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
+            fprintf(fichier,"%s\n",tabProjets[cpt].date);//on sauvegarde la date de publication du projet
+            fprintf(fichier,"%d\n",tabProjets[cpt].etatavancement);//on sauvegarde l'état d'avancement(pourcentage)
+            fprintf(fichier,"%s\n",tabProjets[cpt].description);//on sauvegarde la description du projet
+            fprintf(fichier,"%s\n",tabProjets[cpt].listefinanciers);//on sauvegarde la liste des personnes qui financent le projet
+            fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
+            fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
+            cpt++;
 
 
-void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
-{
-    FILE*fichier;
-    int cpt;
-    printf("%s-%d Charge Projets\n",__FILE__,__LINE__);
-    fichier=fopen("fichierProjet.txt","r");
-    fscanf(fichier,"%d",&*nbProjets);//on lit nbProjets
-    cpt=0;
-    while(cpt<*nbProjets)
-    {
-        fscanf(fichier,"%d",& (tabProjets[cpt].numero));//on charge le numéro du projet
-        fscanf(fichier,"%s",& (tabProjets[cpt].nomprojet));//on charge le nom du projet
-        fscanf(fichier,"%s",& (tabProjets[cpt].adressemail));//on charge l'adresse mail de l'artiste qui créé le projet
-        fscanf(fichier,"%s",& (tabProjets[cpt].date));//on charge la date de publication du projet
-        fscanf(fichier,"%d",& (tabProjets[cpt].etatavancement));//on charge l'état d'avancement(pourcentage)
-        fscanf(fichier,"%s",& (tabProjets[cpt].description));//on charge la description du projet
-        fscanf(fichier,"%s",& (tabProjets[cpt].listefinanciers));//on charge la liste des personnes qui financent le projet
-        fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
-        fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
-        printf("%s-%d      %d %s-%s.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail);
-        cpt++;
+        }
+        fclose(fichier);
     }
-    fclose(fichier);
-}
+
+
+    void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
+    {
+        FILE*fichier;
+        int cpt;
+        fichier=fopen("fichierProjet.txt","r");
+        cpt=0;
+        while(cpt<*nbProjets)
+        {
+            fscanf(fichier,"%d",& (tabProjets[cpt].nomprojet));//on charge le nom du projet
+            fscanf(fichier,"%s",& (tabProjets[cpt].adressemail));//on charge l'adresse mail de l'artiste qui créé le projet
+            fscanf(fichier,"%s",& (tabProjets[cpt].date));//on charge la date de publication du projet
+            fscanf(fichier,"%d",& (tabProjets[cpt].etatavancement));//on charge l'état d'avancement(pourcentage)
+            fscanf(fichier,"%s",& (tabProjets[cpt].description));//on charge la description du projet
+            fscanf(fichier,"%s",& (tabProjets[cpt].listefinanciers));//on charge la liste des personnes qui financent le projet
+            fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
+            fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
+            cpt++;
+
+
+        }
+        fclose(fichier);
+    }
 

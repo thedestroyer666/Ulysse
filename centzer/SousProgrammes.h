@@ -28,7 +28,6 @@ struct producteur
 
 struct projet
 {
-    int numero;//identifiant du projet
     char nomprojet[NB_LETTRES+1];
     char adressemail[NB_LETTRES+1]; //adresse mail de l'artiste
     char date[NB_LETTRES+1]; //date de publication du projet
