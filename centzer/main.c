@@ -314,14 +314,14 @@ int main()
                     //printf("%d %s vs %s\n",__LINE__,tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail);
                     if(strcmp(tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail)==0)
                     {
-                        printf("%s\n",tabProjets[cpt].nomprojet);//total
-                        printf("%s\n",tabProjets[cpt].adressemail);
-                        printf("%s\n",tabProjets[cpt].date);
-                        printf("%f\n",tabProjets[cpt].financement);
-                        printf("%f\n",tabProjets[cpt].sommeversee);
-                        printf("%s\n",tabProjets[cpt].listefinanciers);
-                        printf("%s\n",tabProjets[cpt].description);
-                        printf("%d\n",tabProjets[cpt].etatavancement);
+                        printf("%s\n ",tabProjets[cpt].nomprojet);//total
+                        printf("%s\n ",tabProjets[cpt].adressemail);
+                        printf("%s\n ",tabProjets[cpt].date);
+                        printf("f  %f\n ",tabProjets[cpt].financement);
+                        printf("sv %f\n ",tabProjets[cpt].sommeversee);
+                        printf("lf %s\n ",tabProjets[cpt].listefinanciers);
+                        printf("%s\n ",tabProjets[cpt].description);
+                        printf("%d\n ",tabProjets[cpt].etatavancement);
                     }
                     else
                     {
@@ -368,37 +368,44 @@ int main()
                 printf("%s-%d %d/%d\n",__FILE__,__LINE__,cpt,nbProjets);
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
-                    printf("%d",cpt);
-                    printf("%s\n",tabProjets[cpt].nomprojet);
-                    printf("%s\n",tabProjets[cpt].adressemail);
-                    printf("%s\n",tabProjets[cpt].date);
-                    printf("%f\n",tabProjets[cpt].financement);
-                    printf("%f\n",tabProjets[cpt].sommeversee);
-                    printf("%s\n",tabProjets[cpt].listefinanciers);
-                    printf("%s\n",tabProjets[cpt].description);
+                    printf("%d\n ",cpt);
+                    printf("%s\n ",tabProjets[cpt].nomprojet);
+                    printf("%s\n ",tabProjets[cpt].adressemail);
+                    printf("%s\n ",tabProjets[cpt].date);
+                    printf("f  %f\n ",tabProjets[cpt].financement);
+                    printf("sv %f\n ",tabProjets[cpt].sommeversee);
+                    printf("lf %s\n ",tabProjets[cpt].listefinanciers);
+                    printf("%s\n ",tabProjets[cpt].description);
                     printf("%d\n",tabProjets[cpt].etatavancement);
                     cpt++;
                 }
                 printf("%s-%d\n",__FILE__,__LINE__);
+                printf("%s-%d\n",__FILE__,__LINE__);
+                cpt=666;
+                printf("%s-%d %d %d\n",__FILE__,__LINE__,cpt,nbProjets);
                 while(cpt<0 || cpt>nbProjets)
                 {
                     printf("\nTapez le numéro du projet dans lequel vous voulez investir\n");//choisir un projet
                     scanf("%d",& cpt);
                 }
+                s=666;
+                printf("%s-%d %d %d %f\n",__FILE__,__LINE__,cpt,nbProjets, s);
+                printf("%s-%d %f/%f\n",__FILE__,__LINE__,s,tabProjets[cpt].financement);
                 while(s<0 || s>tabProjets[cpt].financement/*financement du projet*/)
                 {
                     printf("\nQuel montant souhaitez-vous investir?\n");//mettre une somme
                     scanf("%f",& s);
+                    printf("%s-%d %f/%f\n",__FILE__,__LINE__,s,tabProjets[cpt].financement);
                     if(s>tabProjets[cpt].financement)
                     {
                         printf("\nla somme est trop importante, veuillez réduire votre investissement\n");
                     }
                 }
+                printf("%s-%d %f\n",__FILE__,__LINE__,s);
                 tabProjets[cpt].sommeversee=tabProjets[cpt].sommeversee+s;
                 tabProducteurs[producteurco].tabInvest[numeroProjet].sommeproducteur=s;
                 numeroProjet++;
                 tabProjets[cpt].etatavancement=tabProjets[cpt].sommeversee*100/tabProjets[cpt].financement;
-
             }
 
             else if(g==1)//liste des projets dans lesquels ils ont investis

@@ -121,12 +121,12 @@ void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets) //Sauvegarde de
         fprintf(fichier,"%s\n",tabProjets[cpt].nomprojet);//on sauvegarde le nom du projet
         fprintf(fichier,"%s\n",tabProjets[cpt].adressemail);//on sauvegarde l'adresse mail de l'artiste qui créé le projet
         fprintf(fichier,"%s\n",tabProjets[cpt].date);//on sauvegarde la date de publication du projet
+        fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
+        fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
         fprintf(fichier,"%d\n",tabProjets[cpt].etatavancement);//on sauvegarde l'état d'avancement(pourcentage)
         fprintf(fichier,"%s\n",tabProjets[cpt].description);//on sauvegarde la description du projet
         fprintf(fichier,"%s\n",tabProjets[cpt].listefinanciers);//on sauvegarde la liste des personnes qui financent le projet
-        fprintf(fichier,"%f\n",tabProjets[cpt].financement);//on sauvegarde la somme demandée par l'artiste pour son projet
-        fprintf(fichier,"%f\n",tabProjets[cpt].sommeversee);//on sauvegarde la somme versée par le producteur pour ce projet
-        printf("%s-%d      %d %s-%s.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail);
+        printf("%s-%d      %d %s-%s %f.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail, tabProjets[cpt].financement);
         cpt++;
     }
     fclose(fichier);
@@ -146,12 +146,12 @@ void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
         fscanf(fichier,"%s",& (tabProjets[cpt].nomprojet));//on charge le nom du projet
         fscanf(fichier,"%s",& (tabProjets[cpt].adressemail));//on charge l'adresse mail de l'artiste qui créé le projet
         fscanf(fichier,"%s",& (tabProjets[cpt].date));//on charge la date de publication du projet
+        fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
+        fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
         fscanf(fichier,"%d",& (tabProjets[cpt].etatavancement));//on charge l'état d'avancement(pourcentage)
         fscanf(fichier,"%s",& (tabProjets[cpt].description));//on charge la description du projet
         fscanf(fichier,"%s",& (tabProjets[cpt].listefinanciers));//on charge la liste des personnes qui financent le projet
-        fscanf(fichier,"%f",& (tabProjets[cpt].financement));//on charge la somme demandée par l'artiste pour son projet
-        fscanf(fichier,"%f",& (tabProjets[cpt].sommeversee));//on charge la somme versée par le producteur pour ce projet
-        printf("%s-%d      %d %s-%s.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail);
+        printf("%s-%d      %d %s-%s %f.\n",__FILE__,__LINE__, cpt, tabProjets[cpt].nomprojet, tabProjets[cpt].adressemail, tabProjets[cpt].financement);
         cpt++;
     }
     fclose(fichier);
