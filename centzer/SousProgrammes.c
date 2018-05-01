@@ -156,3 +156,16 @@ void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
     }
     fclose(fichier);
 }
+
+void afficheProjet(struct projet tabProjets[100], int indexProjet)
+{
+    printf("%d\n ",indexProjet);
+    printf("%s\n ",tabProjets[indexProjet].adressemail);
+    printf("%s\n ",tabProjets[indexProjet].date);
+    printf("financement  %f\n ",tabProjets[indexProjet].financement);
+    printf("somme versee %f\n ",tabProjets[indexProjet].sommeversee);
+    //printf("lf %s\n ",tabProjets[indexProjet].listefinanciers);
+    printf("%s\n ",tabProjets[indexProjet].description);
+    printf("avancement: %d\n",tabProjets[indexProjet].etatavancement);
+
+}

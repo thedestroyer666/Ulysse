@@ -23,7 +23,7 @@ struct producteur
     char adressemail[NB_LETTRES+1]; //adresse mail de l'utilisateur (producteur)
     char mdp[NB_LETTRES+1]; //mot de passe de l'utilisateur (producteur)
     int nbreArgent; //nombre d'investissements
-    struct investissement *tabInvest;//tableau contenant pour chaque projet la somme versée par le producteur
+    struct investissement tabInvest[10];//tableau contenant pour chaque projet la somme versée par le producteur
 };
 
 struct projet
@@ -49,4 +49,6 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs);
 
 void SAUVEGARDE2 ( struct projet tabProjets[100], int nbProjets);
 void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets);
+
+void afficheProjet(struct projet tabProjets[100], int indexProjet);
 #endif // SOUSPROGRAMMES_H_INCLUDED

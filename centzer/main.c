@@ -203,6 +203,7 @@ int main()
                 while(i==NULL);
                 printf("Choisissez un mot de passe.\n");
                 scanf("%s",(&tabProducteurs[nbProducteurs].mdp));
+                tabProducteurs[nbProducteurs].nbreArgent=0;
                 nbProducteurs=nbProducteurs+1;//on rajoute 1 au nombre de producteurs
                 SAUVEGARDE1(tabProducteurs,nbProducteurs);//on sauvegarde le nouveau producteur
                 producteurco=nbProducteurs;
@@ -219,7 +220,7 @@ int main()
             if(d==1)
             {
                 //Afficher les projets du plus cher au moins cher
-                //Trier les projets: prix décroissants
+                //Trier les projets: prix décroissantsafficheProjet(tabProjets,cpt);
                 //Tant qu'il reste des éléments à trier faire
                 for(indAsc=0; indAsc<nbProjets-1; indAsc+1)
                 {
@@ -239,14 +240,7 @@ int main()
                 cpt=0;
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
-                    printf("%s\n",tabProjets[cpt].nomprojet);
-                    printf("%s\n",tabProjets[cpt].adressemail);
-                    printf("%s\n",tabProjets[cpt].date);
-                    printf("%f\n",tabProjets[cpt].financement);
-                    printf("%f\n",tabProjets[cpt].sommeversee);
-                    printf("%s\n",tabProjets[cpt].listefinanciers);
-                    printf("%s\n",tabProjets[cpt].description);
-                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    afficheProjet(tabProjets,cpt);
                     cpt++;
                 }
             }
@@ -273,14 +267,7 @@ int main()
                 cpt=0;
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
-                    printf("%s\n",tabProjets[cpt].nomprojet);
-                    printf("%s\n",tabProjets[cpt].adressemail);
-                    printf("%s\n",tabProjets[cpt].date);
-                    printf("%f\n",tabProjets[cpt].financement);
-                    printf("%f\n",tabProjets[cpt].sommeversee);
-                    printf("%s\n",tabProjets[cpt].listefinanciers);
-                    printf("%s\n",tabProjets[cpt].description);
-                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    afficheProjet(tabProjets,cpt);
                     cpt++;
                 }
             }
@@ -334,14 +321,7 @@ int main()
                     //printf("%d %s vs %s\n",__LINE__,tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail);
                     if(strcmp(tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail)==0)
                     {
-                        printf("\n%s\n ",tabProjets[cpt].nomprojet);//total
-                        printf("%s\n ",tabProjets[cpt].adressemail);
-                        printf("%s\n ",tabProjets[cpt].date);
-                        printf("financement  %f\n ",tabProjets[cpt].financement);
-                        printf("somme versee %f\n ",tabProjets[cpt].sommeversee);
-                        printf("liste des financiers %s\n ",tabProjets[cpt].listefinanciers);
-                        printf("%s\n ",tabProjets[cpt].description);
-                        printf("avancement %d\n ",tabProjets[cpt].etatavancement);
+                        afficheProjet(tabProjets,cpt);
                     }
                     else
                     {
@@ -387,14 +367,7 @@ int main()
                 printf("%s-%d %d/%d\n",__FILE__,__LINE__,cpt,nbProjets);
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
-                    printf("%d\n ",cpt);
-                    printf("%s\n ",tabProjets[cpt].adressemail);
-                    printf("%s\n ",tabProjets[cpt].date);
-                    printf("financement  %f\n ",tabProjets[cpt].financement);
-                    printf("somme versee %f\n ",tabProjets[cpt].sommeversee);
-                    //printf("lf %s\n ",tabProjets[cpt].listefinanciers);
-                    printf("%s\n ",tabProjets[cpt].description);
-                    printf("avancement: %d\n",tabProjets[cpt].etatavancement);
+                    afficheProjet(tabProjets,cpt);
                     cpt++;
                 }
                 printf("%s-%d\n",__FILE__,__LINE__);
@@ -421,11 +394,17 @@ int main()
                 }
                 printf("%s-%d %f\n",__FILE__,__LINE__,s);
                 tabProducteurs[producteurco].nbreArgent=tabProducteurs[producteurco].nbreArgent+1;//nombre d'nvestssement du producteur
+                j= tabProducteurs[producteurco].nbreArgent;
+                printf("%s-%d %d\n",__FILE__,__LINE__,j);
                 tabProducteurs[producteurco].nbreArgent=j;
                 tabProjets[cpt].sommeversee=tabProjets[cpt].sommeversee+s;
+                printf("%s-%d %f\n",__FILE__,__LINE__,tabProjets[cpt].sommeversee);
                 tabProducteurs[producteurco].tabInvest[j].sommeproducteur=s;
+                printf("%s-%d %f\n",__FILE__,__LINE__,s);
                 tabProjets[cpt].etatavancement=tabProjets[cpt].sommeversee*100/tabProjets[cpt].financement;
+                printf("%s-%d %f\n",__FILE__,__LINE__,s);
                 strcpy(tabProjets[nbProjets].nomprojet,tabProducteurs[producteurco].tabInvest[j].nomprojet);
+                afficheProjet(tabProjets,cpt);
             }
 
             else if(g==1)//liste des projets dans lesquels ils ont investis
@@ -436,7 +415,7 @@ int main()
                 {
                     printf("Nom du projet: %s\n",tabProducteurs[producteurco].tabInvest[j].nomprojet);
                     printf("Somme allouee: %f\n",tabProducteurs[producteurco].tabInvest[j].sommeproducteur);
-                    }
+                }
             }
             h=666;
             while(h!=1 && h!=0)
