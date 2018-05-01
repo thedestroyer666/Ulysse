@@ -316,7 +316,7 @@ int main()
                 scanf("%s",& (tabProjets[nbProjets].date));
                 printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
-                //strcpy(tabProjets[nbProjets].listefinanciers,"");
+                strcpy(tabProjets[nbProjets].listefinanciers,"listefinanciers");
                 //printf("%s-%d %s-%s-%s\n",__FILE__,__LINE__,tabProjets[nbProjets].nomprojet,tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
