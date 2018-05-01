@@ -14,8 +14,8 @@ struct artiste
 
 struct investissement
 {
+    char nomprojet[NB_LETTRES+1];//nom du projet
     float sommeproducteur; //somme versee par le producteur
-    int numeroProjet;
 };
 struct producteur
 {
@@ -28,7 +28,7 @@ struct producteur
 
 struct projet
 {
-    char nomprojet[NB_LETTRES+1];
+    char nomprojet[NB_LETTRES+1];//nom du projet
     char adressemail[NB_LETTRES+1]; //adresse mail de l'artiste
     char date[NB_LETTRES+1]; //date de publication du projet
     float financement; //financement du projet

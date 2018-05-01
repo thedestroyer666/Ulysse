@@ -72,8 +72,8 @@ void SAUVEGARDE1 ( struct producteur tabProducteurs[50], int nbProducteurs) //Sa
         fprintf(fichier,"%d\n",tabProducteurs[cpt].nbreArgent);//on sauvegarde le nombre d'investissements
         for (j=0; j<tabProducteurs[cpt].nbreArgent; j++)
         {
+            fprintf(fichier,"%s\n",tabProducteurs[cpt].tabInvest[j].nomprojet);
             fprintf(fichier,"%f\n",tabProducteurs[cpt].tabInvest[j].sommeproducteur);
-            fprintf(fichier,"%d\n",tabProducteurs[cpt].tabInvest[j].numeroProjet);
         }
         printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabProducteurs[cpt].adressemail);
         cpt++;
@@ -97,8 +97,8 @@ void CHARGEMENT1 ( struct producteur tabProducteurs[50], int *nbProducteurs) //c
         fscanf(fichier,"%d",& (tabProducteurs[cpt].nbreArgent));//
         for (j=0; j<tabProducteurs[cpt].nbreArgent; j++)
         {
-            fscanf(fichier,"%f",&tabProducteurs[cpt].tabInvest[j].sommeproducteur);
-            fscanf(fichier,"%d",&tabProducteurs[cpt].tabInvest[j].numeroProjet);
+            fscanf(fichier,"%s",& (tabProducteurs[cpt].tabInvest[j].nomprojet));
+            fscanf(fichier,"%f",& (tabProducteurs[cpt].tabInvest[j].sommeproducteur));
         }
         printf("%s-%d      %d %s\n",__FILE__,__LINE__, cpt, tabProducteurs[cpt].adressemail);
         cpt++;
@@ -156,4 +156,3 @@ void CHARGEMENT2 ( struct projet tabProjets[100], int *nbProjets) //chargement
     }
     fclose(fichier);
 }
-

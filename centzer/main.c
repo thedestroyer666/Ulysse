@@ -13,11 +13,10 @@ int main()
     struct investissement tabInvestissements[100];//on déclare les informations sur les investissements
     int nbArtistes=0; //nombre d'artistes initialisé à 0
     int nbProducteurs=0; //nombre de producteurs initialisé à 0
-    int nbProjets=0; //nombre de projets initialisé à
-    int numeroProjet;
+    int nbProjets=0; //nombre de projets initialisé à 0
 
     int a; //l'utilisateur a un compte ou pas
-    int z; //l'utlsateur a déjà un compte mas il est artiste ou utilisateur
+    int z; //l'utlsateur a déjà un compte mas il est artiste ou producteur
     int b; //l'utilisateur veut s'inscrire ou non
     int c; //l'utilisateur est un artiste ou un producteur
     int d; //Les projets que le visiteur veux voir
@@ -25,6 +24,8 @@ int main()
     int f; //options de l'artiste
     int g; //options du producteur
     int h; //l'utilisateur veut continuer ou quitter
+    int i; //vérification de l'arobaz dans le mail de l'utilisateur
+    int j;//compteur investissements du producteur
     int indAsc, indDesc; //Indices de parcours ascendants et descendants pour le tri du tableau
     struct projet tampon;
     int cpt; //compteur
@@ -40,7 +41,7 @@ int main()
     COULEUR(0,7);
     printf("\n                           BIENVENUE SUR SEEZER  \n ",7);
     printf("\n                       Le label de musique participatif :) \n");
-    a=666;
+    a=666;//on initialise toute nos variables à une valeur quelconque
     z=666;
     b=666;
     c=666;
@@ -49,6 +50,7 @@ int main()
     f=666;
     g=666;
     h=666;
+    i=666;
 
 
     while(a!=0 && a!=1)
@@ -106,7 +108,7 @@ int main()
         {
             printf("Quel est votre adresse mail ?\n"); //Demander son adresse mail et son mot de passe
             scanf("%s",&emailTape);
-            printf("Entrez votre mot de passe\n.");
+            printf("Entrez votre mot de passe\n");
             scanf("%s",&mdpTape);
 
 
@@ -162,8 +164,18 @@ int main()
             {
                 printf("Quel nom d'artiste voulez-vous utiliser?\n");
                 scanf("%s",&(tabArtistes[nbArtistes].nom));
-                printf("Quelle est votre adresse mail ?\n");
-                scanf("%s",&(tabArtistes[nbArtistes].adressemail));
+                do
+                {
+                    printf("Quelle est votre adresse mail ?\n");
+                    scanf("%s",&(tabArtistes[nbArtistes].adressemail));
+                    i=(strchr((tabArtistes[nbArtistes].adressemail), 64));
+                    if(i==NULL)
+                    {
+                        printf("Erreur adresse mail invalide\n");
+                    }
+                }
+                while(i==NULL);
+
                 printf("Choisissez un mot de passe.\n");
                 scanf("%s",&(tabArtistes[nbArtistes].mdp));
                 tabArtistes[nbArtistes].nbreProjets=0;//on initialise le nombre de projet à 0
@@ -178,14 +190,22 @@ int main()
             {
                 printf("Quel nom de producteur voulez-vous utiliser?\n");
                 scanf("%s",&(tabProducteurs[nbProducteurs].nom));
-                printf("Quelle est votre adresse mail ?\n");
-                scanf("%s",&(tabProducteurs[nbProducteurs].adressemail));
+                do
+                {
+                    printf("Quelle est votre adresse mail ?\n");
+                    scanf("%s",&(tabProducteurs[nbProducteurs].adressemail));
+                    i=(strchr((tabProducteurs[nbProducteurs].adressemail), 64));
+                    if(i==NULL)
+                    {
+                        printf("erreur adresse mail invalide\n");
+                    }
+                }
+                while(i==NULL);
                 printf("Choisissez un mot de passe.\n");
                 scanf("%s",(&tabProducteurs[nbProducteurs].mdp));
                 nbProducteurs=nbProducteurs+1;//on rajoute 1 au nombre de producteurs
                 SAUVEGARDE1(tabProducteurs,nbProducteurs);//on sauvegarde le nouveau producteur
                 producteurco=nbProducteurs;
-                numeroProjet=0;
                 e=1;
             }
         }
@@ -278,7 +298,7 @@ int main()
         while(h!=1)
         {
             //printf("%d h=%d f=%d e=%d\n",__LINE__,h,f,e);
-            while(f!=0 && f!=1 && f!=2 && f!=3)
+            while(f!=0 && f!=1)
             {
                 //printf("%d h=%d f=%d e=%d\n",__LINE__,h,f,e);
                 printf("\n\n Que voulez-vous faire ?\n   0:Proposer un projet\n   1:Consulter l'etat de mes projets\n");
@@ -296,7 +316,7 @@ int main()
                 scanf("%s",& (tabProjets[nbProjets].date));
                 printf("\n Rentrez un montant \n");//montant
                 scanf("%f",& (tabProjets[nbProjets].financement));
-                strcpy(tabProjets[nbProjets].listefinanciers,"");
+                //strcpy(tabProjets[nbProjets].listefinanciers,"");
                 //printf("%s-%d %s-%s-%s\n",__FILE__,__LINE__,tabProjets[nbProjets].nomprojet,tabProjets[nbProjets].adressemail,tabArtistes[artisteco].adressemail);
                 nbProjets++;
                 SAUVEGARDE2(tabProjets,nbProjets);
@@ -314,18 +334,18 @@ int main()
                     //printf("%d %s vs %s\n",__LINE__,tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail);
                     if(strcmp(tabProjets[cpt].adressemail,tabArtistes[artisteco].adressemail)==0)
                     {
-                        printf("%s\n ",tabProjets[cpt].nomprojet);//total
+                        printf("\n%s\n ",tabProjets[cpt].nomprojet);//total
                         printf("%s\n ",tabProjets[cpt].adressemail);
                         printf("%s\n ",tabProjets[cpt].date);
-                        printf("f  %f\n ",tabProjets[cpt].financement);
-                        printf("sv %f\n ",tabProjets[cpt].sommeversee);
-                        printf("lf %s\n ",tabProjets[cpt].listefinanciers);
+                        printf("financement  %f\n ",tabProjets[cpt].financement);
+                        printf("somme versee %f\n ",tabProjets[cpt].sommeversee);
+                        printf("liste des financiers %s\n ",tabProjets[cpt].listefinanciers);
                         printf("%s\n ",tabProjets[cpt].description);
-                        printf("%d\n ",tabProjets[cpt].etatavancement);
+                        printf("avancement %d\n ",tabProjets[cpt].etatavancement);
                     }
                     else
                     {
-                        printf("%d mail correspond pas\n",__LINE__);
+                        //printf("%d mail correspond pas\n",__LINE__);
                     }
                     cpt++;
                     //printf("%s-%d\n",__FILE__,__LINE__);
@@ -353,8 +373,7 @@ int main()
 
             do
             {
-                printf("\n\n   Que voulez-vous faire ? \n   0:Investir dans un projet \n   1:Voir la liste des projets dans lesquels vous avez investis" );
-                printf("   \n   2:Voir la somme totale que vous avez investie\n");
+                printf("\n\n   Que voulez-vous faire ? \n   0:Investir dans un projet \n   1:Voir la liste des projets dans lesquels vous avez investis\n " );
                 scanf("%d",& g);
             }
             while(g<0 || g>1);
@@ -369,14 +388,13 @@ int main()
                 while(cpt<nbProjets)  //Affichage du tableau des projets
                 {
                     printf("%d\n ",cpt);
-                    printf("%s\n ",tabProjets[cpt].nomprojet);
                     printf("%s\n ",tabProjets[cpt].adressemail);
                     printf("%s\n ",tabProjets[cpt].date);
-                    printf("f  %f\n ",tabProjets[cpt].financement);
-                    printf("sv %f\n ",tabProjets[cpt].sommeversee);
-                    printf("lf %s\n ",tabProjets[cpt].listefinanciers);
+                    printf("financement  %f\n ",tabProjets[cpt].financement);
+                    printf("somme versee %f\n ",tabProjets[cpt].sommeversee);
+                    //printf("lf %s\n ",tabProjets[cpt].listefinanciers);
                     printf("%s\n ",tabProjets[cpt].description);
-                    printf("%d\n",tabProjets[cpt].etatavancement);
+                    printf("avancement: %d\n",tabProjets[cpt].etatavancement);
                     cpt++;
                 }
                 printf("%s-%d\n",__FILE__,__LINE__);
@@ -385,7 +403,7 @@ int main()
                 printf("%s-%d %d %d\n",__FILE__,__LINE__,cpt,nbProjets);
                 while(cpt<0 || cpt>nbProjets)
                 {
-                    printf("\nTapez le numéro du projet dans lequel vous voulez investir\n");//choisir un projet
+                    printf("\nTapez le numero du projet dans lequel vous voulez investir\n");//choisir un projet
                     scanf("%d",& cpt);
                 }
                 s=666;
@@ -396,23 +414,29 @@ int main()
                     printf("\nQuel montant souhaitez-vous investir?\n");//mettre une somme
                     scanf("%f",& s);
                     printf("%s-%d %f/%f\n",__FILE__,__LINE__,s,tabProjets[cpt].financement);
-                    if(s>tabProjets[cpt].financement)
+                    /*if(s>tabProjets[cpt].financement)
                     {
                         printf("\nla somme est trop importante, veuillez réduire votre investissement\n");
-                    }
+                    }*/
                 }
                 printf("%s-%d %f\n",__FILE__,__LINE__,s);
+                tabProducteurs[producteurco].nbreArgent=tabProducteurs[producteurco].nbreArgent+1;//nombre d'nvestssement du producteur
+                tabProducteurs[producteurco].nbreArgent=j;
                 tabProjets[cpt].sommeversee=tabProjets[cpt].sommeversee+s;
-                tabProducteurs[producteurco].tabInvest[numeroProjet].sommeproducteur=s;
-                numeroProjet++;
+                tabProducteurs[producteurco].tabInvest[j].sommeproducteur=s;
                 tabProjets[cpt].etatavancement=tabProjets[cpt].sommeversee*100/tabProjets[cpt].financement;
+                strcpy(tabProjets[nbProjets].nomprojet,tabProducteurs[producteurco].tabInvest[j].nomprojet);
             }
 
             else if(g==1)//liste des projets dans lesquels ils ont investis
             {
                 g=666;
-                //afficher la liste des projets et les différents totaux et avancement
-
+                j=0;
+                for(j=1; j<tabProducteurs[producteurco].nbreArgent; j++) //afficher la liste des projets et les différents totaux et avancement
+                {
+                    printf("Nom du projet: %s\n",tabProducteurs[producteurco].tabInvest[j].nomprojet);
+                    printf("Somme allouee: %f\n",tabProducteurs[producteurco].tabInvest[j].sommeproducteur);
+                    }
             }
             h=666;
             while(h!=1 && h!=0)
@@ -423,5 +447,6 @@ int main()
         }
     }
 
+    printf("\nA bientot :)\n");
     return 0;
 }
